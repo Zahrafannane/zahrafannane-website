@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Join the Waitlist — The Elevated Self Method™</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --white:     #FFFFFF;
+    --offwhite:  #FAFAF8;
+    --gold:      #B8922A;
+    --gold-lt:   #D4AA48;
+    --gold-pale: #F5EDD4;
+    --gold-line: rgba(184,146,42,.18);
+    --text:      #1A1208;
+    --text-mid:  #5A5040;
+    --text-light:#9A9080;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--offwhite);
+    color: var(--text);
+    overflow-x: hidden;
+    cursor: none;
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+  }
+
+  /* CURSOR */
+  #cursorDot { width:6px; height:6px; background:var(--gold); border-radius:50%; position:fixed; top:0; left:0; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); }
+  #cursorRing { width:30px; height:30px; border:1px solid var(--gold); border-radius:50%; position:fixed; top:0; left:0; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition:width .3s,height .3s,opacity .3s; opacity:.4; }
+
+  /* NAV */
+  nav {
+    position: fixed; top:0; left:0; right:0; z-index:200;
+    display: flex; align-items:center; justify-content:space-between;
+    padding: 28px 72px;
+    background: rgba(250,250,248,.96); backdrop-filter:blur(16px);
+    box-shadow: 0 1px 0 var(--gold-line);
+  }
+  .nav-logo { font-family:'Cormorant Garamond',serif; font-size:19px; font-weight:400; letter-spacing:.1em; color:var(--text); text-decoration:none; transition:color .3s; }
+  .nav-logo:hover { color:var(--gold); }
+  .nav-back { font-size:10px; font-weight:500; letter-spacing:.22em; text-transform:uppercase; color:var(--text-light); text-decoration:none; transition:color .3s; display:flex; align-items:center; gap:8px; }
+  .nav-back::before { content:'←'; font-size:12px; }
+  .nav-back:hover { color:var(--gold); }
+
+  /* MAIN */
+  main {
+    flex: 1;
+    display: flex; align-items:center; justify-content:center;
+    padding: 120px 40px 80px;
+  }
+
+  .waitlist-wrap {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center;
+    max-width: 1000px; width: 100%;
+  }
+
+  /* LEFT */
+  .waitlist-left {}
+  .waitlist-tag {
+    font-size: 10px; letter-spacing:.28em; text-transform:uppercase;
+    color: var(--gold); margin-bottom:20px;
+    display: flex; align-items:center; gap:14px;
+  }
+  .waitlist-tag::before { content:''; width:28px; height:1px; background:var(--gold); }
+  .waitlist-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 300; line-height: 1.1; color: var(--text);
+    margin-bottom: 24px;
+  }
+  .waitlist-title em { font-style:italic; color:var(--gold); }
+  .waitlist-desc {
+    font-size: 14px; font-weight:300; line-height:1.9;
+    color: var(--text-mid); margin-bottom:40px;
+  }
+
+  /* What they get */
+  .waitlist-perks { display:flex; flex-direction:column; gap:0; }
+  .perk {
+    display: flex; align-items:flex-start; gap:16px;
+    padding: 18px 0; border-bottom:1px solid var(--gold-line);
+  }
+  .perk:first-child { border-top:1px solid var(--gold-line); }
+  .perk-icon { color:var(--gold); font-size:14px; min-width:16px; padding-top:2px; }
+  .perk-text { font-size:13px; font-weight:300; line-height:1.65; color:var(--text-mid); }
+  .perk-text strong { font-weight:500; color:var(--text); display:block; margin-bottom:2px; font-size:11px; letter-spacing:.1em; text-transform:uppercase; }
+
+  /* RIGHT — Form */
+  .waitlist-form-wrap {
+    background: var(--white);
+    border: 1px solid var(--gold-line);
+    padding: 52px 48px;
+    position: relative;
+  }
+  .waitlist-form-wrap::before {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:2px;
+    background: var(--gold);
+  }
+  .form-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px; font-weight:400; color:var(--text);
+    margin-bottom: 6px;
+  }
+  .form-title em { font-style:italic; color:var(--gold); }
+  .form-sub {
+    font-size: 12px; font-weight:300; color:var(--text-light);
+    margin-bottom: 36px; letter-spacing:.04em;
+  }
+
+  .form-group { display:flex; flex-direction:column; gap:10px; margin-bottom:24px; }
+  .form-label { font-size:10px; font-weight:500; letter-spacing:.2em; text-transform:uppercase; color:var(--text-mid); }
+  .form-input {
+    background: var(--offwhite);
+    border: 1px solid var(--gold-line);
+    padding: 15px 18px;
+    font-family: 'Jost', sans-serif;
+    font-size: 13px; font-weight:300; color:var(--text);
+    outline: none; transition:border-color .3s; width:100%;
+  }
+  .form-input:focus { border-color:var(--gold); background:var(--white); }
+  .form-input::placeholder { color:var(--text-light); }
+
+  .form-select {
+    background: var(--offwhite);
+    border: 1px solid var(--gold-line);
+    padding: 15px 18px;
+    font-family: 'Jost', sans-serif;
+    font-size: 13px; font-weight:300; color:var(--text);
+    outline: none; transition:border-color .3s; width:100%;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23B8922A'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    cursor: none;
+  }
+  .form-select:focus { border-color:var(--gold); }
+
+  .form-submit {
+    width: 100%;
+    font-size: 11px; font-weight:600; letter-spacing:.24em;
+    text-transform: uppercase; color:var(--white);
+    background: var(--text); border:none;
+    padding: 18px; cursor:none;
+    font-family: 'Jost', sans-serif;
+    transition: background .3s; margin-top:8px;
+  }
+  .form-submit:hover { background:var(--gold); }
+
+  /* Success message */
+  .form-success {
+    display: none;
+    text-align: center; padding: 40px 20px;
+  }
+  .form-success-icon {
+    font-size: 36px; margin-bottom:20px; display:block;
+  }
+  .form-success-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px; font-weight:300; color:var(--text);
+    margin-bottom:12px;
+  }
+  .form-success-title em { font-style:italic; color:var(--gold); }
+  .form-success-text {
+    font-size: 13px; font-weight:300; line-height:1.8; color:var(--text-mid);
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--gold-line);
+    padding: 28px 72px;
+    display: flex; justify-content:space-between; align-items:center;
+  }
+  .footer-copy { font-size:11px; color:var(--text-light); letter-spacing:.06em; }
+  .footer-motto { font-family:'Cormorant Garamond',serif; font-size:13px; font-style:italic; color:rgba(184,146,42,.5); }
+
+  /* MOBILE */
+  @media(max-width:860px){
+    nav { padding:18px 28px; }
+    .waitlist-wrap { grid-template-columns:1fr; gap:48px; }
+    .waitlist-form-wrap { padding:36px 28px; }
+    main { padding:100px 24px 60px; }
+    footer { padding:20px 28px; flex-direction:column; gap:10px; text-align:center; }
+  }
+</style>
+</head>
+<body>
+
+<div id="cursorDot"></div>
+<div id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">Zahra Fannane</a>
+  <a class="nav-back" href="method.html">The Method</a>
+</nav>
+
+<!-- MAIN -->
+<main>
+  <div class="waitlist-wrap">
+
+    <!-- LEFT -->
+    <div class="waitlist-left">
+      <p class="waitlist-tag">Coming 2026</p>
+      <h1 class="waitlist-title">
+        The Elevated<br/><em>Self Method™</em><br/>Waitlist
+      </h1>
+      <p class="waitlist-desc">
+        A 7-week self-paced course on the one thing most people never address — the subconscious patterns running their results, their relationships and their life. Be the first to know when it launches.
+      </p>
+      <div class="waitlist-perks">
+        <div class="perk">
+          <span class="perk-icon">✦</span>
+          <div class="perk-text">
+            <strong>Early Access</strong>
+            Waitlist members get access before the general public.
+          </div>
+        </div>
+        <div class="perk">
+          <span class="perk-icon">✦</span>
+          <div class="perk-text">
+            <strong>Founding Price</strong>
+            A special rate exclusively for those who join the waitlist.
+          </div>
+        </div>
+        <div class="perk">
+          <span class="perk-icon">✦</span>
+          <div class="perk-text">
+            <strong>First Updates</strong>
+            Be the first to hear about the course content and launch date.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT — Form -->
+    <div class="waitlist-form-wrap">
+
+      <div id="formContent">
+        <h2 class="form-title">Join the <em>Waitlist</em></h2>
+        <p class="form-sub">No spam. Just the information that matters.</p>
+
+        <div class="form-group">
+          <label class="form-label">First Name</label>
+          <input class="form-input" type="text" id="firstName" placeholder="Your first name" required/>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Last Name</label>
+          <input class="form-input" type="text" id="lastName" placeholder="Your last name" required/>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input class="form-input" type="email" id="email" placeholder="Your email address" required/>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">What brings you here?</label>
+          <select class="form-select" id="reason">
+            <option value="" disabled selected>Select one</option>
+            <option value="stuck">I keep getting the same results</option>
+            <option value="patterns">I want to understand my patterns</option>
+            <option value="beliefs">I want to work on my beliefs</option>
+            <option value="identity">I want to shift my identity</option>
+            <option value="nervous">I want to regulate my nervous system</option>
+            <option value="all">All of the above</option>
+          </select>
+        </div>
+
+        <button class="form-submit" onclick="submitWaitlist()">Reserve My Spot</button>
+      </div>
+
+      <!-- Success -->
+      <div class="form-success" id="formSuccess">
+        <span class="form-success-icon">✦</span>
+        <h3 class="form-success-title">You're on the <em>list.</em></h3>
+        <p class="form-success-text">
+          You'll be the first to know when The Elevated Self Method™ launches — including founding member pricing. Watch your inbox.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-copy">© 2026 Zahra Fannane LLC. All rights reserved.</span>
+  <span class="footer-motto">The version of you that has everything already exists.</span>
+</footer>
+
+<script>
+  // Cursor
+  const dot=document.getElementById('cursorDot'),ring=document.getElementById('cursorRing');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px';});
+  (function anim(){rx+=(mx-rx)*.16;ry+=(my-ry)*.16;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(anim);})();
+  document.querySelectorAll('a,button,select').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{ring.style.width='50px';ring.style.height='50px';ring.style.opacity='1';});
+    el.addEventListener('mouseleave',()=>{ring.style.width='30px';ring.style.height='30px';ring.style.opacity='.4';});
+  });
+
+  function submitWaitlist() {
+    const firstName = document.getElementById('firstName').value;
+    const lastName = document.getElementById('lastName').value;
+    const email = document.getElementById('email').value;
+    const reason = document.getElementById('reason').value;
+
+    if (!firstName || !email) {
+      alert('Please fill in your name and email.');
+      return;
+    }
+
+    // Send via mailto
+    const subject = encodeURIComponent('Waitlist — The Elevated Self Method™');
+    const body = encodeURIComponent(
+      'Name: ' + firstName + ' ' + lastName + '\n' +
+      'Email: ' + email + '\n' +
+      'What brings them: ' + reason
+    );
+    window.location.href = 'mailto:contact@zahrafannane.com?subject=' + subject + '&body=' + body;
+
+    // Show success
+    document.getElementById('formContent').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  }
+</script>
+</body>
+</html>
