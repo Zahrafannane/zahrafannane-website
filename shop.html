@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Shop — Zahra Fannane</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --white:#FFFFFF; --offwhite:#FAFAF8; --gold:#B8922A; --gold-lt:#D4AA48;
+    --gold-pale:#F5EDD4; --gold-line:rgba(184,146,42,.18);
+    --text:#1A1208; --text-mid:#5A5040; --text-light:#9A9080;
+  }
+  html { scroll-behavior:smooth; }
+  body { font-family:'Jost',sans-serif; background:var(--white); color:var(--text); overflow-x:hidden; cursor:none; }
+
+  #cursorDot { width:6px; height:6px; background:var(--gold); border-radius:50%; position:fixed; top:0; left:0; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); }
+  #cursorRing { width:30px; height:30px; border:1px solid var(--gold); border-radius:50%; position:fixed; top:0; left:0; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition:width .3s,height .3s,opacity .3s; opacity:.4; }
+
+  nav { position:fixed; top:0; left:0; right:0; z-index:200; display:flex; align-items:center; justify-content:space-between; padding:30px 72px; background:rgba(255,255,255,.96); backdrop-filter:blur(16px); box-shadow:0 1px 0 var(--gold-line); transition:padding .4s; }
+  nav.scrolled { padding:16px 72px; }
+  .nav-logo { font-family:'Cormorant Garamond',serif; font-size:19px; font-weight:400; letter-spacing:.1em; color:var(--text); text-decoration:none; transition:color .3s; }
+  .nav-logo:hover { color:var(--gold); }
+  .nav-links { display:flex; gap:44px; list-style:none; align-items:center; }
+  .nav-links a { font-size:10px; font-weight:500; letter-spacing:.24em; text-transform:uppercase; color:var(--text-mid); text-decoration:none; transition:color .3s; }
+  .nav-links a:hover, .nav-links a.active { color:var(--gold); }
+  .nav-cta { font-size:10px; font-weight:500; letter-spacing:.22em; text-transform:uppercase; color:var(--gold); border:1px solid var(--gold); padding:11px 28px; text-decoration:none; transition:background .3s,color .3s; }
+  .nav-cta:hover { background:var(--gold); color:var(--white); }
+
+  .page-header { padding:160px 72px 80px; background:var(--offwhite); text-align:center; position:relative; overflow:hidden; }
+  .page-header::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 50% 0%, rgba(184,146,42,.07) 0%, transparent 65%); pointer-events:none; }
+  .page-header-tag { font-size:10px; letter-spacing:.32em; text-transform:uppercase; color:var(--gold); margin-bottom:22px; display:flex; align-items:center; justify-content:center; gap:14px; }
+  .page-header-tag::before,.page-header-tag::after { content:''; width:28px; height:1px; background:var(--gold); }
+  .page-header-title { font-family:'Cormorant Garamond',serif; font-size:clamp(42px,6vw,80px); font-weight:300; line-height:1; color:var(--text); margin-bottom:20px; }
+  .page-header-title em { font-style:italic; color:var(--gold); }
+  .page-header-sub { font-size:14px; font-weight:300; color:var(--text-light); letter-spacing:.04em; }
+
+  .container { max-width:1100px; margin:0 auto; padding:0 72px; }
+  .section-label { display:flex; align-items:center; gap:20px; font-size:10px; letter-spacing:.28em; text-transform:uppercase; color:var(--gold); margin-bottom:56px; }
+  .section-label::after { content:''; flex:1; height:1px; background:var(--gold-line); }
+
+  /* PRODUCTS */
+  .products-section { padding:100px 0 80px; background:var(--white); }
+  .deck-product { display:grid; grid-template-columns:1fr 1fr; gap:72px; align-items:center; }
+
+  /* Card stack */
+  .deck-preview { position:relative; height:420px; display:flex; align-items:center; justify-content:center; cursor:pointer; }
+  .deck-preview:hover .preview-hint { opacity:1; }
+  .card-stack { position:relative; width:260px; height:340px; }
+  .stacked-card { position:absolute; width:220px; height:300px; background:var(--white); border:1px solid var(--gold-line); transition:transform .5s cubic-bezier(.25,.46,.45,.94); }
+  .stacked-card:nth-child(1) { transform:rotate(-6deg) translate(-20px,12px); box-shadow:0 8px 32px rgba(26,18,8,.08); }
+  .stacked-card:nth-child(2) { transform:rotate(-2deg) translate(-6px,4px); box-shadow:0 8px 32px rgba(26,18,8,.06); }
+  .stacked-card:nth-child(3) { transform:rotate(1deg); box-shadow:0 8px 32px rgba(26,18,8,.1); }
+  .deck-preview:hover .stacked-card:nth-child(1) { transform:rotate(-10deg) translate(-36px,16px); }
+  .deck-preview:hover .stacked-card:nth-child(2) { transform:rotate(-3deg) translate(-10px,6px); }
+  .deck-preview:hover .stacked-card:nth-child(3) { transform:rotate(3deg) translate(4px,-2px); }
+  .stacked-card-inner { padding:28px 24px; height:100%; display:flex; flex-direction:column; justify-content:space-between; }
+  .card-inner-top { display:flex; justify-content:space-between; align-items:flex-start; }
+  .card-num-badge { font-size:10px; letter-spacing:.18em; color:var(--gold); font-weight:500; }
+  .card-category-badge { font-size:9px; letter-spacing:.14em; text-transform:uppercase; color:var(--text-light); background:var(--offwhite); padding:4px 10px; border:1px solid var(--gold-line); }
+  .card-gold-line { width:28px; height:1px; background:var(--gold); margin:14px 0; }
+  .card-title-text { font-family:'Cormorant Garamond',serif; font-size:20px; font-weight:400; color:var(--text); line-height:1.2; flex:1; }
+  .card-science-note { font-size:10px; font-weight:300; line-height:1.6; color:var(--text-light); border-top:1px solid var(--gold-line); padding-top:10px; margin-top:10px; font-style:italic; }
+  .card-bottom { display:flex; justify-content:space-between; align-items:center; }
+  .card-zf { font-family:'Cormorant Garamond',serif; font-size:13px; font-weight:300; color:var(--gold); letter-spacing:.1em; }
+  .card-deck-label { font-size:8px; letter-spacing:.14em; text-transform:uppercase; color:var(--text-light); }
+  .preview-hint { position:absolute; bottom:-4px; left:50%; transform:translateX(-50%); font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); opacity:0; transition:opacity .3s; white-space:nowrap; }
+
+  .product-tag { font-size:10px; letter-spacing:.24em; text-transform:uppercase; color:var(--gold); margin-bottom:16px; display:flex; align-items:center; gap:10px; }
+  .product-tag::before { content:''; width:20px; height:1px; background:var(--gold); }
+  .product-name { font-family:'Cormorant Garamond',serif; font-size:38px; font-weight:300; color:var(--text); line-height:1.1; margin-bottom:20px; }
+  .product-name em { font-style:italic; color:var(--gold); }
+  .product-desc { font-size:13px; font-weight:300; line-height:1.95; color:var(--text-mid); margin-bottom:28px; }
+  .product-includes { display:flex; flex-direction:column; gap:12px; margin-bottom:36px; }
+  .product-include { display:flex; align-items:center; gap:12px; font-size:12px; font-weight:300; color:var(--text-light); }
+  .product-include::before { content:'✦'; color:var(--gold); font-size:9px; min-width:12px; }
+  .product-footer { display:flex; align-items:center; gap:28px; padding-top:28px; border-top:1px solid var(--gold-line); flex-wrap:wrap; }
+  .product-price { font-family:'Cormorant Garamond',serif; font-size:48px; font-weight:300; color:var(--text); line-height:1; }
+  .product-price sup { font-size:22px; vertical-align:super; color:var(--gold); }
+  .product-price-label { font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--text-light); margin-top:4px; }
+  .btn-buy { display:inline-flex; align-items:center; gap:12px; font-size:10px; font-weight:600; letter-spacing:.24em; text-transform:uppercase; color:var(--white); background:var(--text); padding:17px 40px; text-decoration:none; transition:background .3s; border:none; cursor:none; }
+  .btn-buy::after { content:"→"; font-size:13px; letter-spacing:0; transition:transform .3s; }
+  .btn-buy:hover { background:var(--gold); }
+  .btn-buy:hover::after { transform:translateX(4px); }
+  .btn-buy-outline-dark { display:inline-flex; align-items:center; gap:12px; font-size:10px; font-weight:600; letter-spacing:.24em; text-transform:uppercase; color:var(--text); border:1px solid var(--text); padding:17px 40px; text-decoration:none; transition:background .3s,color .3s; cursor:none; }
+  .btn-buy-outline-dark::after { content:"→"; font-size:13px; letter-spacing:0; transition:transform .3s; }
+  .btn-buy-outline-dark:hover { background:var(--text); color:var(--white); }
+  .btn-buy-outline-dark:hover::after { transform:translateX(4px); }
+  .product-divider { width:1px; height:48px; background:var(--gold-line); margin:0 8px; } font-size:10px; font-weight:500; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); text-decoration:none; background:none; border:none; cursor:none; padding:0; transition:opacity .3s; }
+  .btn-preview:hover { opacity:.7; }
+  .btn-preview::before { content:"◎"; font-size:12px; }
+
+  /* SECTION DIVIDER */
+  .section-divider { height:1px; background:var(--gold-line); margin:0 72px; }
+
+  /* PROGRAMS */
+  .programs-section { padding:80px 0 120px; background:var(--offwhite); }
+  .programs-grid { display:grid; grid-template-columns:1fr 1fr; gap:32px; }
+  .program-card { background:var(--white); border:1px solid var(--gold-line); display:flex; flex-direction:column; position:relative; overflow:hidden; transition:transform .3s,box-shadow .4s; }
+  .program-card:hover { transform:translateY(-4px); box-shadow:0 20px 56px rgba(184,146,42,.1); }
+  .program-card-line { position:absolute; top:0; left:0; right:0; height:2px; background:var(--gold); transform:scaleX(0); transform-origin:left; transition:transform .55s cubic-bezier(.77,0,.18,1); }
+  .program-card:hover .program-card-line { transform:scaleX(1); }
+  .program-visual { height:200px; background:var(--offwhite); display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
+  .program-week-dots { display:flex; gap:10px; }
+  .program-week-dot { width:10px; height:10px; border-radius:50%; border:1px solid var(--gold); background:transparent; transition:background .3s; }
+  .program-card:hover .program-week-dot { background:var(--gold); }
+  .program-visual-num { font-family:'Cormorant Garamond',serif; font-size:110px; font-weight:300; color:var(--gold-line); line-height:1; position:absolute; bottom:-10px; right:20px; }
+  .coming-badge { position:absolute; top:16px; right:16px; background:var(--gold); color:var(--white); font-size:9px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; padding:6px 14px; }
+  .program-body { padding:36px 36px 40px; display:flex; flex-direction:column; flex:1; }
+  .program-tag { font-size:10px; letter-spacing:.22em; text-transform:uppercase; color:var(--gold); margin-bottom:14px; display:flex; align-items:center; gap:10px; }
+  .program-tag::before { content:''; width:18px; height:1px; background:var(--gold); }
+  .program-name { font-family:'Cormorant Garamond',serif; font-size:28px; font-weight:400; color:var(--text); line-height:1.1; margin-bottom:16px; }
+  .program-name em { font-style:italic; color:var(--gold); }
+  .program-desc { font-size:13px; font-weight:300; line-height:1.85; color:var(--text-mid); margin-bottom:28px; flex:1; }
+  .program-footer { display:flex; align-items:center; justify-content:space-between; padding-top:24px; border-top:1px solid var(--gold-line); }
+  .program-price { font-family:'Cormorant Garamond',serif; font-size:36px; font-weight:300; color:var(--text); line-height:1; }
+  .program-price sup { font-size:18px; vertical-align:super; color:var(--gold); }
+  .program-price-label { font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--text-light); margin-top:4px; }
+  .btn-program { display:inline-flex; align-items:center; gap:10px; font-size:10px; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); border:1px solid var(--gold); padding:14px 28px; text-decoration:none; transition:background .3s,color .3s; }
+  .btn-program::after { content:"→"; font-size:13px; letter-spacing:0; transition:transform .3s; }
+  .btn-program:hover { background:var(--gold); color:var(--white); }
+  .btn-program:hover::after { transform:translateX(4px); }
+
+  /* MODAL */
+  .modal-overlay { position:fixed; inset:0; background:rgba(26,18,8,.88); z-index:1000; display:flex; align-items:flex-start; justify-content:center; opacity:0; pointer-events:none; transition:opacity .4s ease; padding:24px; overflow-y:auto; }
+  .modal-overlay.open { opacity:1; pointer-events:all; }
+  .modal { background:var(--white); max-width:1080px; width:100%; margin:auto; position:relative; transform:translateY(20px); transition:transform .4s ease; }
+  .modal-overlay.open .modal { transform:translateY(0); }
+  .modal-close { position:absolute; top:20px; right:24px; font-size:20px; color:var(--text-light); cursor:none; background:none; border:none; line-height:1; transition:color .3s; z-index:10; font-family:'Cormorant Garamond',serif; }
+  .modal-close:hover { color:var(--gold); }
+
+  /* Modal header */
+  .modal-header { padding:52px 52px 0; }
+  .modal-title { font-family:'Cormorant Garamond',serif; font-size:36px; font-weight:300; color:var(--text); margin-bottom:6px; }
+  .modal-title em { font-style:italic; color:var(--gold); }
+  .modal-subtitle { font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--text-light); margin-bottom:36px; }
+
+  /* TABS */
+  .tabs-bar { display:flex; gap:0; border-bottom:1px solid var(--gold-line); overflow-x:auto; padding:0 52px; scrollbar-width:none; }
+  .tabs-bar::-webkit-scrollbar { display:none; }
+  .tab-btn { font-size:10px; font-weight:500; letter-spacing:.2em; text-transform:uppercase; color:var(--text-light); background:none; border:none; border-bottom:2px solid transparent; padding:14px 20px; cursor:none; white-space:nowrap; transition:color .3s,border-color .3s; display:flex; align-items:center; gap:8px; }
+  .tab-btn:hover { color:var(--gold); }
+  .tab-btn.active { color:var(--gold); border-bottom-color:var(--gold); }
+  .tab-count { font-size:9px; background:var(--gold-pale); color:var(--gold); padding:2px 7px; border-radius:10px; font-weight:600; }
+
+  /* Tab content */
+  .tab-content { display:none; padding:40px 52px 52px; }
+  .tab-content.active { display:block; }
+  .cards-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+
+  /* Preview cards */
+  .preview-card { border:1px solid var(--gold-line); padding:28px 24px; display:flex; flex-direction:column; min-height:320px; transition:border-color .3s,box-shadow .3s; position:relative; }
+  .preview-card:hover { border-color:var(--gold); box-shadow:0 8px 32px rgba(184,146,42,.1); }
+  .preview-card-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; }
+  .preview-card-num { font-size:11px; font-weight:500; letter-spacing:.16em; color:var(--gold); }
+  .preview-card-cat { font-size:9px; letter-spacing:.14em; text-transform:uppercase; color:var(--text-light); background:var(--offwhite); padding:4px 10px; }
+  .preview-card-divider { width:24px; height:1px; background:var(--gold); margin-bottom:14px; }
+  .preview-card-name { font-family:'Cormorant Garamond',serif; font-size:19px; font-weight:400; color:var(--text); line-height:1.2; margin-bottom:12px; }
+  .preview-card-desc { font-size:12px; font-weight:300; line-height:1.75; color:var(--text-mid); margin-bottom:12px; flex:1; }
+  .preview-card-practice { font-size:11px; font-weight:400; line-height:1.65; color:var(--text); background:var(--gold-pale); padding:10px 12px; margin-bottom:12px; border-left:2px solid var(--gold); }
+  .preview-card-science { font-size:10px; font-weight:300; font-style:italic; color:var(--text-light); line-height:1.6; border-top:1px solid var(--gold-line); padding-top:10px; }
+  .preview-card-zf { font-family:'Cormorant Garamond',serif; font-size:12px; color:var(--gold); letter-spacing:.08em; margin-top:12px; }
+
+  /* Modal CTA */
+  .modal-cta { padding:0 52px 52px; display:flex; align-items:center; gap:20px; border-top:1px solid var(--gold-line); padding-top:32px; }
+  .modal-note { font-size:12px; font-weight:300; color:var(--text-light); }
+
+  /* FOOTER */
+  footer { background:var(--text); padding:40px 0; }
+  .footer-bottom { max-width:1100px; margin:0 auto; padding:0 72px; display:flex; justify-content:space-between; align-items:center; }
+  .footer-copy { font-size:11px; color:rgba(255,255,255,.2); letter-spacing:.06em; }
+  .footer-back { font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:rgba(184,146,42,.5); text-decoration:none; transition:color .3s; }
+  .footer-back:hover { color:var(--gold-lt); }
+
+  /* REVEAL */
+  .reveal { opacity:0; transform:translateY(28px); transition:opacity .85s ease,transform .85s ease; }
+  .reveal.visible { opacity:1; transform:none; }
+
+  @media(max-width:900px){
+    nav { padding:18px 28px; } nav.scrolled { padding:14px 28px; }
+    .nav-links,.nav-cta { display:none; }
+    .page-header { padding:120px 28px 60px; }
+    .container { padding:0 28px; }
+    .section-divider { margin:0 28px; }
+    .deck-product { grid-template-columns:1fr; gap:40px; }
+    .deck-preview { height:300px; }
+    .programs-grid { grid-template-columns:1fr; }
+    .cards-grid { grid-template-columns:1fr; }
+    .modal-header,.tabs-bar,.tab-content,.modal-cta { padding-left:20px; padding-right:20px; }
+    .footer-bottom { padding:0 28px; flex-direction:column; gap:16px; text-align:center; }
+  }
+</style>
+</head>
+<body>
+
+<div id="cursorDot"></div>
+<div id="cursorRing"></div>
+
+<nav id="mainNav">
+  <a class="nav-logo" href="index.html">Zahra Fannane</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="index.html#offerings">Offerings</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="method.html">The Method</a></li>
+    <li><a href="shop.html" class="active">Shop</a></li>
+  </ul>
+  <a class="nav-cta" href="https://calendly.com/zahrafannanecoach/discovery-call" target="_blank">Work with Zahra</a>
+</nav>
+
+<div class="page-header">
+  <p class="page-header-tag">Shop</p>
+  <h1 class="page-header-title">Tools for <em>Real Change.</em></h1>
+  <p class="page-header-sub">Science-backed. Subconscious-targeted. Built to move the needle.</p>
+</div>
+
+<section class="products-section">
+  <div class="container">
+    <div class="section-label">Products</div>
+    <div class="deck-product reveal">
+      <div class="deck-preview" id="openModal">
+        <div class="card-stack">
+          <div class="stacked-card">
+            <div class="stacked-card-inner">
+              <div class="card-inner-top"><span class="card-num-badge">Card 06</span><span class="card-category-badge">Awareness</span></div>
+              <div class="card-gold-line"></div>
+              <div class="card-title-text">The Assumption Audit</div>
+              <div class="card-science-note">The brain fills gaps with past experience — most of what we see is actually memory.</div>
+              <div class="card-bottom"><span class="card-zf">ZF</span><span class="card-deck-label">The Rewire Deck™</span></div>
+            </div>
+          </div>
+          <div class="stacked-card">
+            <div class="stacked-card-inner">
+              <div class="card-inner-top"><span class="card-num-badge">Card 09</span><span class="card-category-badge">Belief</span></div>
+              <div class="card-gold-line"></div>
+              <div class="card-title-text">The Belief Inventory</div>
+              <div class="card-science-note">Core beliefs form before age 7 — they operate as unconscious filters.</div>
+              <div class="card-bottom"><span class="card-zf">ZF</span><span class="card-deck-label">The Rewire Deck™</span></div>
+            </div>
+          </div>
+          <div class="stacked-card">
+            <div class="stacked-card-inner">
+              <div class="card-inner-top"><span class="card-num-badge">Card 01</span><span class="card-category-badge">Awareness</span></div>
+              <div class="card-gold-line"></div>
+              <div class="card-title-text">The Pattern Interrupt</div>
+              <div class="card-science-note">The brain runs on predictive coding — it replays familiar patterns to conserve energy.</div>
+              <div class="card-bottom"><span class="card-zf">ZF</span><span class="card-deck-label">The Rewire Deck™</span></div>
+            </div>
+          </div>
+        </div>
+        <span class="preview-hint">Click to preview all 61 cards</span>
+      </div>
+
+      <div class="deck-info">
+        <p class="product-tag">Digital Card Deck</p>
+        <h2 class="product-name">The Rewire <em>Deck™</em></h2>
+        <p class="product-desc">Your mind has been running a program you didn't write.</p>
+        <p class="product-desc" style="margin-top:10px;">Every result in your life — the ones you want and the ones you don't — traces back to the same place. The beliefs, patterns and subconscious expectations operating beneath the surface, formed long before you had the awareness to question them.</p>
+        <p class="product-desc" style="margin-top:10px;">Neuroplasticity is the brain's ability to form new connections throughout life — through repetition, emotion and new experience. Every card in this deck is designed to drive that process deliberately. This is not about thinking more positively. It is about changing what is actually running beneath the surface.</p>
+        <p class="product-desc" style="margin-top:10px;"><em>This is not motivation. This is rewiring.</em></p>
+        <div class="product-includes">
+          <div class="product-include">61 science-backed practices across 5 categories</div>
+          <div class="product-include">Awareness · Belief · Identity · Safety · Action</div>
+          <div class="product-include">Each card includes the science, a core insight and a daily repeatable practice</div>
+          <div class="product-include">For Feeling Stuck · Fear of Change · Not Feeling Enough</div>
+          <div class="product-include">Digital download — $44 &nbsp;|&nbsp; Printed hard copy — $62</div>
+        </div>
+        <div class="product-footer">
+          <div>
+            <div class="product-price"><sup>$</sup>44</div>
+            <div class="product-price-label">Digital Download</div>
+          </div>
+          <a class="btn-buy" href="https://zahrafan.gumroad.com/l/ktfmak" target="_blank">Buy Digital</a>
+          <div class="product-divider"></div>
+          <div>
+            <div class="product-price"><sup>$</sup>62</div>
+            <div class="product-price-label">Printed Hard Copy</div>
+          </div>
+          <a class="btn-buy btn-buy-outline-dark" href="#" target="_blank">Buy Printed</a>
+        </div>
+          <button class="btn-preview" id="openModalBtn">Preview All 61 Cards</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <button class="modal-close" id="closeModal">✕</button>
+    <div class="modal-header">
+      <h2 class="modal-title">The Rewire <em>Deck™</em> — All 61 Cards</h2>
+      <p class="modal-subtitle">Browse by category — each card includes the science, a core insight and a daily repeatable practice</p>
+    </div>
+    <div class="tabs-bar"><button class="tab-btn active" data-tab="awareness">Awareness <span class="tab-count">11</span></button><button class="tab-btn " data-tab="belief">Belief <span class="tab-count">11</span></button><button class="tab-btn " data-tab="identity">Identity <span class="tab-count">11</span></button><button class="tab-btn " data-tab="safety">Safety <span class="tab-count">11</span></button><button class="tab-btn " data-tab="action">Action <span class="tab-count">11</span></button></div>
+    <div class="tab-content" id="tab-awareness"><div class="cards-grid">
+        <div class="preview-card">
+          <div class="preview-card-top">
+            <span class="preview-card-num">Card 01</span>
+            <span class="preview-card-cat">Awareness</span>
+          </div>
+          <div class="preview-card-divider"></div>
+          <div class="preview-card-name">The Pattern Interrupt</div>
+          <div class="preview-card-desc">Notice the moment before the reaction. That pause is where change lives. Catch yourself mid-pattern — don't judge it, just name it. Naming activates the prefrontal cortex and begins to loosen the pattern's grip.</div>
+          <div class="preview-card-practice"><strong>Practice:</strong> Set 3 alarms today. When they go off, ask: "What am I feeling right now and where did it start?"</div>
+          <div class="preview-card-science">The brain runs on predictive coding — it replays familiar patterns to conserve energy.</div>
+          <div class="preview-card-zf">ZF ✦</div>
+        </div>
+        <div class="preview-card">
+          <div class="preview-card-top">
+            <span class="preview-card-num">Card 02</span>
+            <span class="preview-card-cat">Awareness</span>
+          </div>
+          <div class="preview-card-divider"></div>
+          <div class="preview-card-name">The Trigger Map</div>
+          <div class="preview-card-desc">Your triggers aren't random. They are precise — linked to specific memories, people, tones of voice, environments. You don't overcome a trigger by avoiding it. You overcome it by understanding it.</div>
+          <div class="preview-card-practice"><strong>Practice:</strong> Write down one trigger. Trace it back — when did you first feel this? How old were you?</div>
+          <div class="preview-card-science">Triggers are learned associations stored in the amygdala — they fire before conscious thought.</div>
+          <div class="preview-card-zf">ZF ✦</div>
+        </div>
+        <div class="preview-card">
+          <div class="preview-card-top">
+            <span class="preview-card-num">Card 03</span>
+            <span class="preview-card-cat">Awareness</span>
+          </div>
+          <div class="preview-card-divider"></div>
+          <div class="preview-card-name">The Emotional Loop</div>
+          <div class="preview-card-desc">Most emotional loops aren't about the present moment. They're old feelings looking for resolution. The loop continues until the original wound is seen — not suppressed, not performed — seen.</div>
+          <div class="preview-card-practice"><strong>Practice:</strong> Next time you feel a strong emotion, ask: "Is this about now — or is this familiar?"</div>
+          <div class="preview-card-science">Emotions that aren't processed get stored somatically and replay as behaviour.</div>
+          <div class="preview-card-zf">ZF ✦</div>
+        </div>
+        <div class="preview-card">
+          <div class="preview-card-top">
+            <span class="preview-card-num">Card 04</span>
+            <span class="preview-card-cat">Awareness</span>
+          </div>
+          <div class="preview-card-divider"></div>
+          <div class="preview-card-name">The Observer</div>
+          <div class="preview-card-desc">You are not your thoughts. You are the one watching them. The moment you observe a thought rather than become it, you create distance — and distance creates choice.</div>
+          <div class="preview-card-practice"><strong>Practice:</strong> Spend 5 minutes today watching your thoughts like clouds passing. Don't engage. Just observe.</div>
+          <div class="preview-card-science">Metacognition activates the prefrontal cortex and reduces amygdala reactivity.</div>
+          <div class="preview-card-zf">ZF ✦</div>
+        </div>
+        <div class="preview-card">
+          <div class="preview-card-top">
+            <span class="preview-card-num">Card 05</span>
+            <span class="preview-card-cat">Awareness</span>
+          </div>
+          <div class="preview-card-divider"></div>
+          <div class="preview-card-name">The Body Signal</div>
+          <div class="preview-card-desc">Your body knows before your mind does. Tension in the chest, a tight jaw, a sinking stomach — these are data points, not inconveniences. Start reading them as information.</div>
+          <div class="preview-card-practice"><strong>Practice:</strong> Scan your body right now. Where are you holding tension? What emotion might live there?</div>
+          <div class="preview-card-science">The body stores emotional memory — somatic markers signal the brain before conscious awareness.</div>
+          <div class="preview-card-zf">ZF ✦</div>
+        </div>
+        <div class="preview-card">
+          <div class="preview-card-top">
+            <span class="preview-card-num">Card 06</span>
+            <span class="preview-card-cat">Awareness</span>
+          </div>
+          <div class="preview-card-divider"></div>
+          <div class="preview-card-name">The Assumption Audit</div>
+          <div class="preview-card-desc">You are rarely reacting to what's actually happening. You are reacting to what you assume is happening — based on what happened before. Today, question one assumption you're treating as fact.</div>
+          <div class="preview-card-practice"><strong>Practice:</strong> Write: "I assumed ___ but what if ___?"</div>
+          <div class="preview-card-science">The brain fills in gaps with past experience — most of what we see is actually memory.</div>
+          <div class="preview-card-zf">ZF ✦</div>
+        </div>
+        <div class="preview-card">
+          <div class="preview-card-top">
+            <span class="preview-card-num">Card 07</span>
+            <span class="preview-card-cat">Awareness</span>
+          </div>
+          <div class="preview-card-divider"></div>
+          <div class="preview-card-name">The Repetition Pattern</div>
+          <div class="preview-card-desc">The situations that keep repeating in your life are not bad luck. They are your nervous system recreating what's familiar — because familiar feels safe, even when it hurts.</div>
+          <div class="preview-card-practice"><strong>Practice:</strong> Identify one situation that keeps repeating. Ask: "What belief would someone need to keep creating this?"</div>
+          <div class="preview-card-science">Neurons that fire together wire together — Hebb's Law. Repetition deepens every neural pathway.</div>
+          <div class="preview-card-zf">ZF ✦</div>
+        </div>
+        <div class="preview-card">
+          <div class="preview-card-top">
+            <span class="preview-card-num">Card 08</span>
+            <span class="preview-card-cat">Awareness</span>
+          </div>
+          <div class="preview-card-divider"></div>
+          <div class="preview-card-name">The Window of Tolerance</div>
+          <div class="preview-card-desc">Growth doesn't happen when you're overwhelmed — or when you're numb. It happens in the space between. Notice whether you're inside your window or outside it — and choose accordingly.</div>
+          <div class="preview-card-practice"><strong>Practice:</strong> Rate your nervous system right now: 1 (shut down) to 10 (overwhelmed). Aim to stay between 4–7.</div>
+          <div class="preview-card-science">The window of tolerance describes the optimal zone of nervous system arousal where learning occurs.</div>
+          <div class="preview-card-zf">ZF ✦</div>
+        </div></div></div><div class="tab-content" id="tab-belief"><div class="cards-grid">
+        <div class="preview-card">
+          <div class="preview-card-top">
+            <span class="preview-card-num">Card 09</span>
+            <span class="preview-card-cat">Belief</span>
+          </div>
+          <div class="preview-card-divider"></div>
+          <div class="preview-card-name">The Belief Inventory</div>
+          <div class="preview-card-desc">Most of the beliefs running your life were decided by a child doing their best to make sense of the world. They were never meant to be permanent.</div>
+          <div class="preview-card-practice"><strong>Practice:</strong> Complete this sentence 5 times: "I am someone who ___". Then ask — is each one a fact or a decision?</div>
+          <div class="preview-card-science">Core beliefs form before age 7 — they operate as unconscious filters determining what we see as possible.</div>
+          <div class="preview-card-zf">ZF ✦</div>
+        </div>
+        <div class="preview-card">
+          <div class="preview-card-top">
+            <span class="preview-card-num">Card 10</span>
+            <span class="preview-card-cat">Belief</span>
+          </div>
+          <div class="preview-card-divider"></div>
+          <div class="preview-card-name">The Cognitive Reframe</div>
+          <div class="preview-card-desc">A reframe isn't toxic positivity. It's asking: "Is there another way to see this that is equally true?" You don't have to abandon what happened. You just stop letting one interpretation own you.</div>
+          <div class="preview-card-practice"><strong>Practice:</strong> Take one story you've been telling yourself. Write 3 alternative interpretations — all plausible, all different.</div>
+          <div class="preview-card-science">Cognitive reframing creates new neural pathways by introducing alternative interpretations of the same event.</div>
+          <div class="preview-card-zf">ZF ✦</div>
+        </div>
+        <div class="preview-card">
+          <div class="preview-card-top">
+            <span class="preview-card-num">Card 11</span>
+            <span class="preview-card-cat">Belief</span>
+          </div>
+          <div class="preview-card-divider"></div>
+          <div class="preview-card-name">The Belief vs Fact Test</div>
+          <div class="preview-card-desc">Write down a belief that's limiting you. Ask: Can I prove this is true? Has it ever been untrue? Would everyone agree? If any answer is no — it's a belief, not a fact. Beliefs can change.</div>
+          <div class="preview-card-practice"><strong>Practice:</strong> "I believe ___ but the evidence against this is ___."</div>
+          <div class="preview-card-science">The brain cannot distinguish between a strongly held belief and a fact — both activate identical neural responses.</div>
+          <div class="preview-card-zf">ZF ✦</div>
+        </div>
+        <div class="preview-card">
+          <div class="preview-card-top">
+            <span class="preview-card-num">Card 12</span>
+            <span class="preview-card-cat">Belief</span>
+          </div>
+          <div class="preview-card-divider"></div>
+          <div class="preview-card-name">The Origin Story</div>
+          <div class="preview-card-desc">Every limiting belief has a birthplace. When you find where it came from, it loses authority. It stops being THE truth and becomes A response — from a time when you had fewer options.</div>
+          <div class="preview-card-practice"><strong>Practice:</strong> Ask: "Where did I learn this? Who taught me this was true?"</div>
+          <div class="preview-card-science">Schema therapy identifies core beliefs as schemas formed through early childhood and attachment patterns.</div>
+          <div class="preview-card-zf">ZF ✦</div>
+        </div>
+        <div class="preview-card">
+          <div class="preview-card-top">
+            <span class="preview-card-num">Card 13</span>
+            <span class="preview-card-cat">Belief</span>
+          </div>
+          <div class="preview-card-divider"></div>
+          <div class="preview-card-name">The Secondary Gain</div>
+          <div class="preview-card-desc">Sometimes we hold onto a limiting belief because it protects us from something scarier. Believing "I'm not good enough" protects from trying and failing. What is your belief protecting you from?</div>
+          <div class="preview-card-practice"><strong>Practice:</strong> Ask: "If I let this belief go, what would I have to face?"</div>
+          <div class="preview-card-science">The brain maintains beliefs that serve a protective function — even painful beliefs offer psychological payoffs.</div>
+          <div class="preview-card-zf">ZF ✦</div>
+        </div>
+        <div class="preview-card">
+          <div class="preview-card-top">
+            <span class="preview-card-num">Card 14</span>
+            <span class="preview-card-cat">Belief</span>
+          </div>
+          <div class="preview-card-divider"></div>
+          <div class="preview-card-name">The Language Shift</div>
+          <div class="preview-card-desc">The words you use about yourself aren't just descriptive — they're instructive. Your brain listens and builds accordingly. "I always" and "I never" are particularly powerful — and often wrong.</div>
+          <div class="preview-card-practice"><strong>Practice:</strong> For one day, replace "I can't" with "I haven't yet" and notice what shifts.</div>
+          <div class="preview-card-science">Language shapes neural architecture — the words we use consistently become the lens through which we perceive reality.</div>
+          <div class="preview-card-zf">ZF ✦</div>
+        </div>
+        <div class="preview-card">
+          <div class="preview-card-top">
+            <span class="preview-card-num">Card 15</span>
+            <span class="preview-card-cat">Belief</span>
+          </div>
+          <div class="preview-card-divider"></div>
+          <div class="preview-card-name">The Possibility Expander</div>
+          <div class="preview-card-desc">You don't have to believe the new thing yet. You just have to be willing to consider it. Willingness is the entry point. Certainty comes after evidence.</div>
+          <div class="preview-card-practice"><strong>Practice:</strong> Finish: "What if it were possible that ___?" Don't edit. Just write.</div>
+          <div class="preview-card-science">Psychological flexibility — holding multiple perspectives simultaneously — strongly predicts mental wellbeing.</div>
+          <div class="preview-card-zf">ZF ✦</div>
+        </div>
+        <div class="preview-card">
+          <div class="preview-card-top">
+            <span class="preview-card-num">Card 16</span>
+            <span class="preview-card-cat">Belief</span>
+          </div>
+          <div class="preview-card-divider"></div>
+          <div class="preview-card-name">The Confirmation Bias Breaker</div>
+          <div class="preview-card-desc">Your brain is constantly collecting evidence for what it already believes. Right now, it's building a case. The question is — is the case it's building serving you?</div>
+          <div class="preview-card-practice"><strong>Practice:</strong> Find 3 pieces of evidence today that contradict a negative belief you hold about yourself.</div>
+          <div class="preview-card-science">Confirmation bias causes the brain to seek information confirming existing beliefs — filtering out contradictory evidence.</div>
+          <div class="preview-card-zf">ZF ✦</div>
+        </div>
+        <div class="preview-card">
+          <div class="preview-card-top">
+            <span class="preview-card-num">Card 17</span>
+            <span class="preview-card-cat">Belief</span>
+          </div>
+          <div class="preview-card-divider"></div>
+          <div class="preview-card-name">The Inherited Belief</div>
+          <div class="preview-card-desc">Not every belief you carry was formed by your experience. Some were handed down — from parents, culture, lineage. You inherited them without consent. You get to decide what you keep.</div>
+          <div class="preview-card-practice"><strong>Practice:</strong> Ask: "Is this belief mine — or did I inherit it? Would I choose it today?"</div>
+          <div class="preview-card-science">Epigenetics shows that belief systems and stress responses can be passed through generations via gene expression.</div>
+          <div class="preview-card-zf">ZF ✦</div>
+        </div>
+        <div class="preview-card">
+          <div class="preview-card-top">
+            <span class="preview-card-num">Card 18</span>
+            <span class="preview-card-cat">Belief</span>
+          </div>
+          <div class="preview-card-divider"></div>
+          <div class="preview-card-name">The Future Self Reframe</div>
+          <div class="preview-card-desc">Your future self already exists in potential. She has already made the decision you're afraid to make. What would she tell you right now about the belief you're still carrying?</div>
+          <div class="preview-card-practice"><strong>Practice:</strong> Write a letter from your future self about the belief holding you back.</div>
+          <div class="preview-card-science">Mental time travel activates the same neural networks as memory and can reshape present behaviour.</div>
+          <div class="preview-card-zf">ZF ✦</div>
+        </div></div></div><div class="tab-content" id="tab-identity"><div class="cards-grid">
+        <div class="preview-card">
+          <div class="preview-card-top">
+            <span class="preview-card-num">Card 19</span>
+            <span class="preview-card-cat">Identity</span>
+          </div>
+          <div class="preview-card-divider"></div>
+          <div class="preview-card-name">The Identity Statement</div>
+          <div class="preview-card-desc">You don't rise to your goals. You fall to your identity. The fastest way to change behaviour is to change the story of who you are — then act from that story.</div>
+          <div class="preview-card-practice"><strong>Practice:</strong> Write: "I am someone who ___" 10 times. Make each one who you're choosing to become.</div>
+          <div class="preview-card-science">Identity-based change is more durable than goal-based change — we act in alignment with who we believe we are.</div>
+          <div class="preview-card-zf">ZF ✦</div>
+        </div>
+        <div class="preview-card">
+          <div class="preview-card-top">
+            <span class="preview-card-num">Card 20</span>
+            <span class="preview-card-cat">Identity</span>
+          </div>
+          <div class="preview-card-divider"></div>
+          <div class="preview-card-name">The Self-Concept Audit</div>
+          <div class="preview-card-desc">Your self-concept is running in the background of every decision you make. It determines what you try, what you avoid, what you think you deserve. When did you last examine it deliberately?</div>
+          <div class="preview-card-practice"><strong>Practice:</strong> List 5 things you believe about yourself. Mark each: chosen or inherited?</div>
+          <div class="preview-card-science">Self-concept directly shapes behaviour, relationships, and outcomes — and most of it was never consciously chosen.</div>
+          <div class="preview-card-zf">ZF ✦</div>
+        </div>
+        <div class="preview-card">
+          <div class="preview-card-top">
+            <span class="preview-card-num">Card 21</span>
+            <span class="preview-card-cat">Identity</span>
+          </div>
+          <div class="preview-card-divider"></div>
+          <div class="preview-card-name">The Standards Reset</div>
+          <div class="preview-card-desc">Your current results reflect your current standards — not your potential. Standards aren't rules you follow. They're lines you simply don't cross. What does your next-level self no longer tolerate?</div>
+          <div class="preview-card-practice"><strong>Practice:</strong> Write 3 things your future self no longer accepts. Start living that today.</div>
+          <div class="preview-card-science">Internal standards regulate behaviour — people consistently act in ways that match their standards, not their stated goals.</div>
+          <div class="preview-card-zf">ZF ✦</div>
+        </div>
+        <div class="preview-card">
+          <div class="preview-card-top">
+            <span class="preview-card-num">Card 22</span>
+            <span class="preview-card-cat">Identity</span>
+          </div>
+          <div class="preview-card-divider"></div>
+          <div class="preview-card-name">The Comparison Detox</div>
+          <div class="preview-card-desc">Comparison isn't neutral — it's a neurological threat response. Every time you compare, you pull yourself out of your own lane and into someone else's race. Your path has no competition.</div>
+          <div class="preview-card-practice"><strong>Practice:</strong> Every time you catch yourself comparing today, redirect: "What does MY next step look like?"</div>
+          <div class="preview-card-science">Social comparison activates threat responses — triggering cortisol and shifting focus from growth to competition.</div>
+          <div class="preview-card-zf">ZF ✦</div>
+        </div>
+        <div class="preview-card">
+          <div class="preview-card-top">
+            <span class="preview-card-num">Card 23</span>
+            <span class="preview-card-cat">Identity</span>
+          </div>
+          <div class="preview-card-divider"></div>
+          <div class="preview-card-name">The Role Exit</div>
+          <div class="preview-card-desc">Some roles you play were given to you — the responsible one, the quiet one, the one who holds it together. They kept you safe. But they were costumes, not you. Which role are you ready to step out of?</div>
+          <div class="preview-card-practice"><strong>Practice:</strong> Name one role you've outgrown. Write what steps out with it.</div>
+          <div class="preview-card-science">We often maintain outdated identities because they provide social belonging and predictability.</div>
+          <div class="preview-card-zf">ZF ✦</div>
+        </div>
+        <div class="preview-card">
+          <div class="preview-card-top">
+            <span class="preview-card-num">Card 24</span>
+            <span class="preview-card-cat">Identity</span>
+          </div>
+          <div class="preview-card-divider"></div>
+          <div class="preview-card-name">The Worthiness Work</div>
+          <div class="preview-card-desc">You cannot build a life that outpaces your sense of worthiness. Whatever ceiling you keep hitting — look underneath it. There's usually a belief that says you don't deserve what's on the other side.</div>
+          <div class="preview-card-practice"><strong>Practice:</strong> Finish: "I am allowed to have ___" and "I deserve ___ because ___."</div>
+          <div class="preview-card-science">Worthiness is the foundation of belonging, connection, and courageous action — Brené Brown's shame research.</div>
+          <div class="preview-card-zf">ZF ✦</div>
+        </div>
+        <div class="preview-card">
+          <div class="preview-card-top">
+            <span class="preview-card-num">Card 25</span>
+            <span class="preview-card-cat">Identity</span>
+          </div>
+          <div class="preview-card-divider"></div>
+          <div class="preview-card-name">The Next-Level Self</div>
+          <div class="preview-card-desc">She already exists. The version of you who has what you want, lives how you want, moves through the world the way you want. She made decisions. She kept promises. She believed it before she saw it.</div>
+          <div class="preview-card-practice"><strong>Practice:</strong> Describe your next-level self in present tense — not who you want to be, who you ARE becoming.</div>
+          <div class="preview-card-science">Vividly imagining your future self increases present motivation and reduces impulsive decision-making.</div>
+          <div class="preview-card-zf">ZF ✦</div>
+        </div>
+        <div class="preview-card">
+          <div class="preview-card-top">
+            <span class="preview-card-num">Card 26</span>
+            <span class="preview-card-cat">Identity</span>
+          </div>
+          <div class="preview-card-divider"></div>
+          <div class="preview-card-name">The Evidence Builder</div>
+          <div class="preview-card-desc">Your confidence isn't waiting for the right moment. It's built through evidence. Every time you do the thing you said you would, you build a case for who you are becoming.</div>
+          <div class="preview-card-practice"><strong>Practice:</strong> List 5 things you've done that your old self didn't think you could. Read them slowly.</div>
+          <div class="preview-card-science">Self-efficacy is built through mastery experiences — each small win strengthens belief in your own capability.</div>
+          <div class="preview-card-zf">ZF ✦</div>
+        </div>
+        <div class="preview-card">
+          <div class="preview-card-top">
+            <span class="preview-card-num">Card 27</span>
+            <span class="preview-card-cat">Identity</span>
+          </div>
+          <div class="preview-card-divider"></div>
+          <div class="preview-card-name">The Boundary as Identity</div>
+          <div class="preview-card-desc">A boundary isn't a wall. It's a declaration of what you value — and therefore who you are. Every boundary you hold teaches both you and others what you stand for.</div>
+          <div class="preview-card-practice"><strong>Practice:</strong> Name one boundary you've been avoiding. Ask: what does holding it say about who you are?</div>
+          <div class="preview-card-science">Enforcing boundaries activates the same brain regions as self-concept maintenance — they are inseparable.</div>
+          <div class="preview-card-zf">ZF ✦</div>
+        </div>
+        <div class="preview-card">
+          <div class="preview-card-top">
+            <span class="preview-card-num">Card 28</span>
+            <span class="preview-card-cat">Identity</span>
+          </div>
+          <div class="preview-card-divider"></div>
+          <div class="preview-card-name">The Inner Critic Reframe</div>
+          <div class="preview-card-desc">Your inner critic isn't the enemy. It's an old protective voice doing what it was trained to do. You don't silence it — you stop taking its word as truth. You get curious about it instead.</div>
+          <div class="preview-card-practice"><strong>Practice:</strong> Name your inner critic. Talk to it: "I see you. I know why you're here. But I'm not listening today."</div>
+          <div class="preview-card-science">The inner critic is an internalised protective voice — often from early caregivers — not an accurate source of truth.</div>
+          <div class="preview-card-zf">ZF ✦</div>
+        </div></div></div><div class="tab-content" id="tab-safety"><div class="cards-grid">
+        <div class="preview-card">
+          <div class="preview-card-top">
+            <span class="preview-card-num">Card 29</span>
+            <span class="preview-card-cat">Safety</span>
+          </div>
+          <div class="preview-card-divider"></div>
+          <div class="preview-card-name">The Breath Reset</div>
+          <div class="preview-card-desc">Your breath is the fastest access point to your nervous system. A 5-second inhale and 7-second exhale shifts you from threat to safety within minutes. You carry this tool everywhere.</div>
+          <div class="preview-card-practice"><strong>Practice:</strong> Try it now: inhale 5 counts, hold 2, exhale 7. Repeat 4 times. Notice the shift.</div>
+          <div class="preview-card-science">Slow diaphragmatic breathing activates the parasympathetic nervous system — directly counteracting the stress response.</div>
+          <div class="preview-card-zf">ZF ✦</div>
+        </div>
+        <div class="preview-card">
+          <div class="preview-card-top">
+            <span class="preview-card-num">Card 30</span>
+            <span class="preview-card-cat">Safety</span>
+          </div>
+          <div class="preview-card-divider"></div>
+          <div class="preview-card-name">The Grounding Practice</div>
+          <div class="preview-card-desc">When the mind spirals, the body anchors. Feeling your feet on the floor, naming 5 things you can see — these aren't small things. They're neurological interrupts that return you to the present.</div>
+          <div class="preview-card-practice"><strong>Practice:</strong> Name 5 things you see, 4 you can touch, 3 you hear. Do it slowly. You're already safer.</div>
+          <div class="preview-card-science">Grounding activates the senses and brings the prefrontal cortex back online during hyperarousal or dissociation.</div>
+          <div class="preview-card-zf">ZF ✦</div>
+        </div>
+        <div class="preview-card">
+          <div class="preview-card-top">
+            <span class="preview-card-num">Card 31</span>
+            <span class="preview-card-cat">Safety</span>
+          </div>
+          <div class="preview-card-divider"></div>
+          <div class="preview-card-name">The Safety Signal</div>
+          <div class="preview-card-desc">Your nervous system isn't overreacting — it's doing its job. It learned which environments meant danger. The work is teaching it that now is different. Safety has to be practiced, not just declared.</div>
+          <div class="preview-card-practice"><strong>Practice:</strong> Write 3 things that make you feel safe. Create one of them today, intentionally.</div>
+          <div class="preview-card-science">Polyvagal theory shows the nervous system constantly scans for cues of safety or threat — before conscious thought.</div>
+          <div class="preview-card-zf">ZF ✦</div>
+        </div>
+        <div class="preview-card">
+          <div class="preview-card-top">
+            <span class="preview-card-num">Card 32</span>
+            <span class="preview-card-cat">Safety</span>
+          </div>
+          <div class="preview-card-divider"></div>
+          <div class="preview-card-name">The Co-Regulation Reminder</div>
+          <div class="preview-card-desc">You don't always have to regulate alone. Being near someone whose nervous system is calm literally helps yours settle. This is biology, not weakness. Who in your life can you turn to?</div>
+          <div class="preview-card-practice"><strong>Practice:</strong> Reach out to one person today whose presence makes you feel safe. Connection is regulation.</div>
+          <div class="preview-card-science">Proximity to a calm nervous system calms our own through mirror neuron activation — we are wired for co-regulation.</div>
+          <div class="preview-card-zf">ZF ✦</div>
+        </div>
+        <div class="preview-card">
+          <div class="preview-card-top">
+            <span class="preview-card-num">Card 33</span>
+            <span class="preview-card-cat">Safety</span>
+          </div>
+          <div class="preview-card-divider"></div>
+          <div class="preview-card-name">The Somatic Release</div>
+          <div class="preview-card-desc">Your body is not separate from your mind — it's where your mind lives. Stress that isn't discharged stays stored. Shaking, movement, exercise — these aren't optional. They're how the body completes the cycle.</div>
+          <div class="preview-card-practice"><strong>Practice:</strong> Today: 5 minutes of movement you actually enjoy. Not for fitness. For discharge.</div>
+          <div class="preview-card-science">Trauma and stress are stored in the body as muscle tension and incomplete stress responses — movement discharges them.</div>
+          <div class="preview-card-zf">ZF ✦</div>
+        </div>
+        <div class="preview-card">
+          <div class="preview-card-top">
+            <span class="preview-card-num">Card 34</span>
+            <span class="preview-card-cat">Safety</span>
+          </div>
+          <div class="preview-card-divider"></div>
+          <div class="preview-card-name">The Threat vs Challenge</div>
+          <div class="preview-card-desc">The same situation can activate threat or challenge depending on the story you tell. Threat contracts. Challenge expands. One question changes everything: "What if I can handle this?"</div>
+          <div class="preview-card-practice"><strong>Practice:</strong> Reframe one current stressor: "This is a challenge, not a threat. What it's asking of me is ___."</div>
+          <div class="preview-card-science">The brain interprets situations as threats or challenges — and the interpretation determines the physiological response.</div>
+          <div class="preview-card-zf">ZF ✦</div>
+        </div>
+        <div class="preview-card">
+          <div class="preview-card-top">
+            <span class="preview-card-num">Card 35</span>
+            <span class="preview-card-cat">Safety</span>
+          </div>
+          <div class="preview-card-divider"></div>
+          <div class="preview-card-name">The Nervous System Inventory</div>
+          <div class="preview-card-desc">A dysregulated nervous system doesn't just feel bad — it thinks badly. Decision-making, memory, perspective all suffer. You cannot think your way out of a state your body is holding.</div>
+          <div class="preview-card-practice"><strong>Practice:</strong> Check in: are you in fight, flight, freeze, or flow right now? Name it. Naming it is the first step.</div>
+          <div class="preview-card-science">Chronic stress keeps cortisol elevated, impairing learning, memory, and decision-making over time.</div>
+          <div class="preview-card-zf">ZF ✦</div>
+        </div>
+        <div class="preview-card">
+          <div class="preview-card-top">
+            <span class="preview-card-num">Card 36</span>
+            <span class="preview-card-cat">Safety</span>
+          </div>
+          <div class="preview-card-divider"></div>
+          <div class="preview-card-name">The Rest Prescription</div>
+          <div class="preview-card-desc">Rest is not a reward for productivity. It is the foundation of every cognitive function you rely on. When you protect your sleep, you protect your ability to think, feel, and choose well.</div>
+          <div class="preview-card-practice"><strong>Practice:</strong> What is one rest practice you will protect today — not earn, protect?</div>
+          <div class="preview-card-science">Sleep deprivation impairs the prefrontal cortex — responsible for self-regulation, decision-making, and emotional control.</div>
+          <div class="preview-card-zf">ZF ✦</div>
+        </div></div></div><div class="tab-content" id="tab-action"><div class="cards-grid">
+        <div class="preview-card">
+          <div class="preview-card-top">
+            <span class="preview-card-num">Card 37</span>
+            <span class="preview-card-cat">Action</span>
+          </div>
+          <div class="preview-card-divider"></div>
+          <div class="preview-card-name">The Two-Minute Rule</div>
+          <div class="preview-card-desc">Motivation follows action — not the other way around. You don't wait until you feel ready. You do the smallest possible version, and momentum builds from there. Two minutes. That's all.</div>
+          <div class="preview-card-practice"><strong>Practice:</strong> Pick one thing you've been avoiding. Commit to two minutes. Start before you're ready.</div>
+          <div class="preview-card-science">Reducing the size of the first step dramatically increases follow-through — action initiation beats motivation.</div>
+          <div class="preview-card-zf">ZF ✦</div>
+        </div>
+        <div class="preview-card">
+          <div class="preview-card-top">
+            <span class="preview-card-num">Card 38</span>
+            <span class="preview-card-cat">Action</span>
+          </div>
+          <div class="preview-card-divider"></div>
+          <div class="preview-card-name">The Habit Stack</div>
+          <div class="preview-card-desc">You don't build new habits from scratch — you attach them to what already exists. After I make coffee, I will ___. After I sit at my desk, I will ___. The anchor does the heavy lifting.</div>
+          <div class="preview-card-practice"><strong>Practice:</strong> Choose one new behaviour. Find the existing habit it will follow. Write the stack.</div>
+          <div class="preview-card-science">Habit stacking links new behaviours to existing neural pathways — reducing the cognitive load of building something new.</div>
+          <div class="preview-card-zf">ZF ✦</div>
+        </div>
+        <div class="preview-card">
+          <div class="preview-card-top">
+            <span class="preview-card-num">Card 39</span>
+            <span class="preview-card-cat">Action</span>
+          </div>
+          <div class="preview-card-divider"></div>
+          <div class="preview-card-name">The Identity Vote</div>
+          <div class="preview-card-desc">Every action you take is a vote for who you're becoming. You don't need a perfect day. You need one vote. Then another. The identity is built in small decisions, not grand gestures.</div>
+          <div class="preview-card-practice"><strong>Practice:</strong> Cast one vote for your future self today. Name it before you do it.</div>
+          <div class="preview-card-science">Each small action votes for or against the identity you're building — identity is built through accumulated decisions.</div>
+          <div class="preview-card-zf">ZF ✦</div>
+        </div>
+        <div class="preview-card">
+          <div class="preview-card-top">
+            <span class="preview-card-num">Card 40</span>
+            <span class="preview-card-cat">Action</span>
+          </div>
+          <div class="preview-card-divider"></div>
+          <div class="preview-card-name">The Discomfort Window</div>
+          <div class="preview-card-desc">Comfort is the enemy of growth. Not because discomfort is noble — but because every time you move through it, you expand what you believe you can handle. The window widens with every pass.</div>
+          <div class="preview-card-practice"><strong>Practice:</strong> Do one uncomfortable thing today that your future self would thank you for.</div>
+          <div class="preview-card-science">Tolerance for discomfort is trainable — incremental exposure builds resilience and expands capacity over time.</div>
+          <div class="preview-card-zf">ZF ✦</div>
+        </div>
+        <div class="preview-card">
+          <div class="preview-card-top">
+            <span class="preview-card-num">Card 41</span>
+            <span class="preview-card-cat">Action</span>
+          </div>
+          <div class="preview-card-divider"></div>
+          <div class="preview-card-name">The Environment Design</div>
+          <div class="preview-card-desc">Your environment shapes your behaviour more than your willpower does. Stop fighting yourself and start designing. What you see, what's accessible, what surrounds you — all of it is instruction.</div>
+          <div class="preview-card-practice"><strong>Practice:</strong> Change one thing in your environment today to make your desired behaviour easier.</div>
+          <div class="preview-card-science">Designing your environment is more reliable than willpower for sustaining behaviour change — context shapes action.</div>
+          <div class="preview-card-zf">ZF ✦</div>
+        </div>
+        <div class="preview-card">
+          <div class="preview-card-top">
+            <span class="preview-card-num">Card 42</span>
+            <span class="preview-card-cat">Action</span>
+          </div>
+          <div class="preview-card-divider"></div>
+          <div class="preview-card-name">The Completion Ritual</div>
+          <div class="preview-card-desc">Unfinished things take up more mental space than finished ones. Your brain keeps a tab open for everything incomplete. Closing loops — even small ones — frees bandwidth you didn't know you were spending.</div>
+          <div class="preview-card-practice"><strong>Practice:</strong> Name one thing left unfinished that's quietly costing you energy. Close it today.</div>
+          <div class="preview-card-science">Incomplete tasks occupy cognitive bandwidth — the Zeigarnik effect shows the brain keeps open tabs on unfinished loops.</div>
+          <div class="preview-card-zf">ZF ✦</div>
+        </div>
+        <div class="preview-card">
+          <div class="preview-card-top">
+            <span class="preview-card-num">Card 43</span>
+            <span class="preview-card-cat">Action</span>
+          </div>
+          <div class="preview-card-divider"></div>
+          <div class="preview-card-name">The Reframe of Failure</div>
+          <div class="preview-card-desc">Failure isn't the opposite of success. It's the mechanism of it. Every time something doesn't work, your brain gets data it couldn't have gotten any other way. What is this teaching you?</div>
+          <div class="preview-card-practice"><strong>Practice:</strong> Write about one recent failure. Then write: "What this taught me was ___."</div>
+          <div class="preview-card-science">Failure activates the same threat response as physical danger — reframing it as information reduces the threat signal.</div>
+          <div class="preview-card-zf">ZF ✦</div>
+        </div>
+        <div class="preview-card">
+          <div class="preview-card-top">
+            <span class="preview-card-num">Card 44</span>
+            <span class="preview-card-cat">Action</span>
+          </div>
+          <div class="preview-card-divider"></div>
+          <div class="preview-card-name">The Non-Negotiable</div>
+          <div class="preview-card-desc">The relationship you have with yourself is built on the same thing as every other relationship: kept promises. One non-negotiable kept is worth more than ten intentions stated.</div>
+          <div class="preview-card-practice"><strong>Practice:</strong> Name one non-negotiable for this week. Write it down. Keep it. No exceptions.</div>
+          <div class="preview-card-science">Keeping commitments to yourself builds trust in your own reliability — the foundation of genuine confidence.</div>
+          <div class="preview-card-zf">ZF ✦</div>
+        </div></div></div>
+    <div class="modal-cta">
+      <a class="btn-buy" href="https://zahrafan.gumroad.com/l/ktfmak" target="_blank">Get Digital — $44</a>
+      <a class="btn-buy-outline-dark" href="#" target="_blank">Printed — $62</a>
+      <span class="modal-note">Instant digital download · Use at your own pace</span>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 Zahra Fannane LLC. All rights reserved.</span>
+    <a class="footer-back" href="index.html">← Back to main site</a>
+  </div>
+</footer>
+
+<script>
+  const dot=document.getElementById("cursorDot"),ring=document.getElementById("cursorRing");
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener("mousemove",e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+"px";dot.style.top=my+"px";});
+  (function anim(){rx+=(mx-rx)*.16;ry+=(my-ry)*.16;ring.style.left=rx+"px";ring.style.top=ry+"px";requestAnimationFrame(anim);})();
+  document.querySelectorAll("a,button").forEach(el=>{
+    el.addEventListener("mouseenter",()=>{ring.style.width="50px";ring.style.height="50px";ring.style.opacity="1";});
+    el.addEventListener("mouseleave",()=>{ring.style.width="30px";ring.style.height="30px";ring.style.opacity=".4";});
+  });
+  const nav=document.getElementById("mainNav");
+  window.addEventListener("scroll",()=>nav.classList.toggle("scrolled",window.scrollY>60));
+
+  // Modal
+  const overlay=document.getElementById("modalOverlay");
+  const openM=()=>{ overlay.classList.add("open"); document.body.style.overflow="hidden"; };
+  const closeM=()=>{ overlay.classList.remove("open"); document.body.style.overflow=""; };
+  document.getElementById("openModal").addEventListener("click",openM);
+  document.getElementById("openModalBtn").addEventListener("click",openM);
+  document.getElementById("closeModal").addEventListener("click",closeM);
+  overlay.addEventListener("click",e=>{if(e.target===overlay)closeM();});
+  document.addEventListener("keydown",e=>{if(e.key==="Escape")closeM();});
+
+  // Tabs — show first tab active
+  const firstContent = document.querySelector(".tab-content");
+  if(firstContent) firstContent.classList.add("active");
+
+  document.querySelectorAll(".tab-btn").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));
+      document.querySelectorAll(".tab-content").forEach(c=>c.classList.remove("active"));
+      btn.classList.add("active");
+      const target=document.getElementById("tab-"+btn.dataset.tab);
+      if(target) target.classList.add("active");
+    });
+  });
+
+  // Reveal
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add("visible");obs.unobserve(e.target);}});
+  },{threshold:.1});
+  document.querySelectorAll(".reveal").forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
