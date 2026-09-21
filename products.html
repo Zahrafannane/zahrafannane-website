@@ -123,6 +123,8 @@
   .btn-program::after { content:"→"; font-size:13px; letter-spacing:0; transition:transform .3s; }
   .btn-program:hover { background:var(--gold); color:var(--white); }
   .btn-program:hover::after { transform:translateX(4px); }
+  .program-card.wide { grid-column:1/-1; }
+  .free-price { font-family:'Cormorant Garamond',serif; font-size:30px; font-weight:300; color:var(--gold); line-height:1.2; }
 
   /* MODAL */
   .modal-overlay { position:fixed; inset:0; background:rgba(26,18,8,.88); z-index:1000; display:flex; align-items:flex-start; justify-content:center; opacity:0; pointer-events:none; transition:opacity .4s ease; padding:24px; overflow-y:auto; }
@@ -218,7 +220,7 @@
 
 <section class="products-section">
   <div class="container">
-    <div class="section-label">The Collection</div>
+    <div class="section-label">Products</div>
     <div class="deck-product reveal">
       <div class="deck-preview" id="openModal">
         <div class="card-stack">
@@ -283,6 +285,81 @@
           <button class="btn-preview" id="openModalBtn">Preview All 61 Cards</button>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<section class="programs-section">
+  <div class="container">
+    <div class="section-label">Programs &amp; Coaching</div>
+    <div class="programs-grid">
+
+      <!-- Self-Trust File — free -->
+      <div class="program-card reveal">
+        <div class="program-card-line"></div>
+        <div class="program-visual">
+          <div class="program-week-dots">
+            <span class="program-week-dot"></span><span class="program-week-dot"></span><span class="program-week-dot"></span><span class="program-week-dot"></span><span class="program-week-dot"></span><span class="program-week-dot"></span><span class="program-week-dot"></span>
+          </div>
+          <span class="program-visual-num">7</span>
+        </div>
+        <div class="program-body">
+          <p class="program-tag">Free 7-Day Guide</p>
+          <h3 class="program-name">The Self-Trust <em>File</em></h3>
+          <p class="program-desc">Self-trust is the quiet skill underneath every other change. Seven days of small, repeatable moves that teach your nervous system you keep your word to yourself — the starting point for everything else here.</p>
+          <div class="program-footer">
+            <div>
+              <div class="free-price">Free</div>
+              <div class="program-price-label">Instant download</div>
+            </div>
+            <a class="btn-program" href="self-trust-file.html">Get the File</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- The Pedestal — coming soon -->
+      <div class="program-card reveal">
+        <div class="program-card-line"></div>
+        <div class="program-visual">
+          <span class="coming-badge">Coming Soon</span>
+          <div class="program-week-dots">
+            <span class="program-week-dot"></span><span class="program-week-dot"></span><span class="program-week-dot"></span><span class="program-week-dot"></span><span class="program-week-dot"></span><span class="program-week-dot"></span><span class="program-week-dot"></span>
+          </div>
+          <span class="program-visual-num">7</span>
+        </div>
+        <div class="program-body">
+          <p class="program-tag">7-Day Program</p>
+          <h3 class="program-name">The <em>Pedestal</em></h3>
+          <p class="program-desc">You built a pedestal — and put everyone else on it. Seven days to take your place back. A guided workbook plus a short morning audio each day: catch the old pattern, interrupt it, and act as the woman who comes first.</p>
+          <div class="program-footer">
+            <div>
+              <div class="program-price"><sup>$</sup>88</div>
+              <div class="program-price-label">Doors open soon</div>
+            </div>
+            <a class="btn-program" href="https://zahrafannane.beehiiv.com/subscribe" target="_blank" rel="noopener">Hear It First</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1:1 Coaching — wide -->
+      <div class="program-card wide reveal">
+        <div class="program-card-line"></div>
+        <div class="program-body">
+          <p class="program-tag">One-to-One</p>
+          <h3 class="program-name">Private <em>Coaching</em></h3>
+          <p class="program-desc">The deepest way to work together. Six weekly sessions, personalised to your patterns — we find what is actually running beneath the surface, rewire it, and build the identity that makes the life you want feel normal.</p>
+          <div class="program-footer">
+            <div>
+              <div class="program-price"><sup>$</sup>1,400</div>
+              <div class="program-price-label">Founding rate · limited spots</div>
+            </div>
+            <a class="btn-program" href="coaching.html">Explore Coaching</a>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
