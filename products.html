@@ -109,17 +109,6 @@
   .coach-band .btn-arrow:hover { color:var(--gold-lt); }
   .coach-band .feature-img::before { border-color:rgba(220,166,180,.25); }
 
-  /* ============ QUOTE BAND ============ */
-  .quote-band { background:var(--white); padding:120px 0; }
-  .quote-grid { display:grid; grid-template-columns:.72fr 1.28fr; gap:88px; align-items:center; max-width:980px; margin:0 auto; padding:0 72px; }
-  .quote-img { position:relative; }
-  .quote-img img { width:100%; display:block; aspect-ratio:3/4; object-fit:cover; object-position:50% 15%; }
-  .quote-img::before { content:''; position:absolute; top:18px; left:-18px; right:18px; bottom:-18px; border:1px solid var(--rose-line); }
-  .quote-kicker { font-size:10px; letter-spacing:.3em; text-transform:uppercase; color:var(--rose); margin-bottom:26px; }
-  .quote-text { font-family:'Cormorant Garamond',serif; font-size:clamp(30px,3.4vw,44px); font-weight:300; font-style:italic; line-height:1.25; color:var(--text); margin-bottom:30px; }
-  .quote-text b { font-weight:500; color:var(--gold); font-style:italic; }
-  .quote-sig { font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--text-light); }
-
   /* ============ DECK (kept) ============ */
   .products-section { padding:110px 0 100px; background:var(--white); }
   .deck-product { display:grid; grid-template-columns:1fr 1fr; gap:72px; align-items:center; }
@@ -401,19 +390,7 @@
   </div>
 </section>
 
-<!-- QUOTE -->
-<section class="quote-band">
-  <div class="quote-grid reveal">
-    <div class="quote-img">
-      <img src="assets/product-portrait-black.jpg" alt="Zahra Fannane" loading="lazy"/>
-    </div>
-    <div>
-      <p class="quote-kicker">Why it all works together</p>
-      <p class="quote-text">Smart <b>and</b> soft. Ambitious <b>and</b> rested. Educated, fashionable, successful — you were never meant to pick one.</p>
-      <p class="quote-sig">— Zahra Fannane</p>
-    </div>
-  </div>
-</section>
+
 
 <!-- MODAL -->
 <div class="modal-overlay" id="modalOverlay">
