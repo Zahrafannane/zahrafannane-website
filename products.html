@@ -55,13 +55,14 @@
 
   /* ============ FEATURE ROWS ============ */
   .feature { padding:110px 0; }
-  .feature-grid { display:grid; grid-template-columns:.92fr 1.08fr; gap:88px; align-items:center; }
-  .feature-grid.flip .feature-img { order:2; }
-  .feature-img { position:relative; }
-  .feature-img img { width:100%; display:block; aspect-ratio:4/5; object-fit:cover; position:relative; z-index:1; }
-  .feature-img::before { content:''; position:absolute; top:22px; left:-22px; right:22px; bottom:-22px; border:1px solid var(--gold-line); z-index:0; }
-  .feature-grid.flip .feature-img::before { left:22px; right:-22px; }
-  .feature-img.rose-frame::before { border-color:var(--rose-line); }
+  .feature-grid { display:grid; grid-template-columns:1.08fr .92fr; align-items:center; }
+  .feature-img { grid-column:1; grid-row:1; position:relative; }
+  .feature-img img { width:100%; display:block; aspect-ratio:4/5; object-fit:cover; }
+  .feature-panel { grid-column:2; grid-row:1; position:relative; z-index:2; margin-left:-120px; background:var(--white); padding:56px 52px; box-shadow:0 24px 70px rgba(26,18,8,.09); }
+  .feature-grid.flip .feature-img { grid-column:2; }
+  .feature-grid.flip .feature-panel { grid-column:1; margin-left:0; margin-right:-120px; }
+  .pedestal-band .feature-panel { background:var(--white); }
+  .coach-band .feature-panel { background:#3A2530; box-shadow:0 24px 70px rgba(0,0,0,.45); }
   .feature-kicker { font-size:10px; letter-spacing:.26em; text-transform:uppercase; color:var(--gold); margin-bottom:18px; display:flex; align-items:center; gap:12px; }
   .feature-kicker::before { content:''; width:22px; height:1px; background:var(--gold); }
   .feature-kicker.rose { color:var(--rose); }
@@ -217,10 +218,9 @@
     .hero-copy { padding-bottom:56px; }
     .hero-img { margin:0 -28px; }
     .hero-img img { aspect-ratio:4/5; }
-    .feature { padding:72px 0; }
-    .feature-grid { grid-template-columns:1fr; gap:52px; }
-    .feature-grid.flip .feature-img { order:0; }
-    .feature-img::before, .feature-grid.flip .feature-img::before { top:14px; left:14px; right:-14px; bottom:-14px; }
+    .feature { padding:64px 0; }
+    .feature-grid { display:block; }
+    .feature-panel, .feature-grid.flip .feature-panel { margin:-70px 16px 0; padding:38px 28px; }
     .deck-product { grid-template-columns:1fr; gap:40px; }
     .deck-preview { height:300px; }
     .cards-grid { grid-template-columns:1fr; }
@@ -269,15 +269,15 @@
       <div class="feature-img">
         <img src="assets/product-selftrust.jpg" alt="The Self-Trust File" loading="lazy"/>
       </div>
-      <div>
+      <div class="feature-panel">
         <p class="feature-kicker">Free 7-Day Guide</p>
         <h2 class="feature-name">The Self-Trust <em>File</em></h2>
-        <p class="feature-desc">Self-trust is the quiet skill underneath every other change. Seven days of small, repeatable moves that teach your nervous system you keep your word to yourself — the starting point for everything else here.</p>
+        <p class="feature-desc">Self-trust is the skill underneath every other change — the nervous-system-level knowing that you keep your word to yourself. Seven days of small, repeatable moves that build the evidence. Free, and where everything else here starts.</p>
         <div class="feature-meta">
           <span class="feature-price free">Free</span>
           <span class="feature-price-label">Instant download</span>
         </div>
-        <a class="btn-arrow" href="self-trust-file.html">Get the File</a>
+        <a class="btn-arrow" href="self-trust-file.html">Claim It Now</a>
       </div>
     </div>
   </div>
@@ -290,16 +290,16 @@
       <div class="feature-img rose-frame">
         <img src="assets/product-pedestal.jpg" alt="The Pedestal" loading="lazy"/>
       </div>
-      <div>
+      <div class="feature-panel">
         <span class="coming-pill">Coming Soon</span>
         <p class="feature-kicker rose">7-Day Program</p>
         <h2 class="feature-name">The <em>Pedestal</em></h2>
-        <p class="feature-desc">You built a pedestal — and put everyone else on it. Seven days to take your place back. A guided workbook plus a short morning audio each day: catch the old pattern, interrupt it, and act as the woman who comes first.</p>
+        <p class="feature-desc">Seven days from now, you’re the woman on the pedestal — chosen first, heard the first time, impossible to overlook because you stopped overlooking yourself. A workbook and a short morning audio retrain the pattern underneath: catch it, interrupt it, act as her.</p>
         <div class="feature-meta">
           <span class="feature-price"><sup>$</sup>88</span>
           <span class="feature-price-label">Doors open soon</span>
         </div>
-        <a class="btn-arrow" href="https://zahrafannane.beehiiv.com/subscribe" target="_blank" rel="noopener">Hear It First</a>
+        <a class="btn-arrow" href="https://zahrafannane.beehiiv.com/subscribe" target="_blank" rel="noopener">Claim It Now</a>
       </div>
     </div>
   </div>
@@ -312,15 +312,15 @@
       <div class="feature-img">
         <img src="assets/product-coaching.jpg" alt="Private coaching with Zahra Fannane" loading="lazy"/>
       </div>
-      <div>
+      <div class="feature-panel">
         <p class="feature-kicker">One-to-One</p>
         <h2 class="feature-name">Private <em>Coaching</em></h2>
-        <p class="feature-desc">The deepest way to work together. Six weekly sessions, personalised to your patterns — we find what is actually running beneath the surface, rewire it, and build the identity that makes the life you want feel normal.</p>
+        <p class="feature-desc">Six weeks, one-to-one. We find the beliefs actually running your patterns, rewire them, and build the identity that makes the life you want feel normal — not like a performance you have to keep up.</p>
         <div class="feature-meta">
           <span class="feature-price"><sup>$</sup>1,400</span>
           <span class="feature-price-label">Founding rate · limited spots</span>
         </div>
-        <a class="btn-arrow" href="coaching.html">Explore Coaching</a>
+        <a class="btn-arrow" href="coaching.html">Claim It Now</a>
       </div>
     </div>
   </div>
