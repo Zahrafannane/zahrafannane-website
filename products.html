@@ -114,9 +114,10 @@
   .products-section { padding:110px 0 100px; background:var(--white); }
   .deck-product { display:grid; grid-template-columns:1fr 1fr; gap:72px; align-items:center; }
 
-  .deck-preview { position:relative; height:420px; display:flex; align-items:center; justify-content:center; cursor:pointer; }
+  .deck-preview { position:relative; cursor:pointer; }
+  .deck-photo { width:100%; display:block; aspect-ratio:4/5; object-fit:cover; object-position:50% 15%; }
   .deck-preview:hover .preview-hint { opacity:1; }
-  .card-stack { position:relative; width:260px; height:340px; }
+  .card-stack { position:absolute; width:260px; height:340px; right:-28px; bottom:40px; }
   .stacked-card { position:absolute; width:220px; height:300px; background:var(--white); border:1px solid var(--gold-line); transition:transform .5s cubic-bezier(.25,.46,.45,.94); }
   .stacked-card:nth-child(1) { transform:rotate(-6deg) translate(-20px,12px); box-shadow:0 8px 32px rgba(26,18,8,.08); }
   .stacked-card:nth-child(2) { transform:rotate(-2deg) translate(-6px,4px); box-shadow:0 8px 32px rgba(26,18,8,.06); }
@@ -134,7 +135,7 @@
   .card-bottom { display:flex; justify-content:space-between; align-items:center; }
   .card-zf { font-family:'Cormorant Garamond',serif; font-size:13px; font-weight:300; color:var(--gold); letter-spacing:.1em; }
   .card-deck-label { font-size:8px; letter-spacing:.14em; text-transform:uppercase; color:var(--text-light); }
-  .preview-hint { position:absolute; bottom:-4px; left:50%; transform:translateX(-50%); font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); opacity:0; transition:opacity .3s; white-space:nowrap; }
+  .preview-hint { position:absolute; bottom:-30px; left:50%; transform:translateX(-50%); font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); opacity:0; transition:opacity .3s; white-space:nowrap; }
 
   .product-tag { font-size:10px; letter-spacing:.24em; text-transform:uppercase; color:var(--gold); margin-bottom:16px; display:flex; align-items:center; gap:10px; }
   .product-tag::before { content:''; width:20px; height:1px; background:var(--gold); }
@@ -222,7 +223,8 @@
     .feature-grid { display:block; }
     .feature-panel, .feature-grid.flip .feature-panel { margin:-70px 16px 0; padding:38px 28px; }
     .deck-product { grid-template-columns:1fr; gap:40px; }
-    .deck-preview { height:300px; }
+    .deck-preview { margin-bottom:24px; }
+    .card-stack { right:2px; bottom:18px; transform:scale(.72); transform-origin:bottom right; }
     .cards-grid { grid-template-columns:1fr; }
     .modal-header,.tabs-bar,.tab-content,.modal-cta { padding-left:20px; padding-right:20px; }
     .footer-bottom { padding:0 28px; flex-direction:column; gap:16px; text-align:center; }
@@ -297,7 +299,6 @@
         <p class="feature-desc">Seven days from now, you’re the woman on the pedestal — chosen first, heard the first time, impossible to overlook because you stopped overlooking yourself. A workbook and a short morning audio retrain the pattern underneath: catch it, interrupt it, act as her.</p>
         <div class="feature-meta">
           <span class="feature-price"><sup>$</sup>88</span>
-          <span class="feature-price-label">Doors open soon</span>
         </div>
         <a class="btn-arrow" href="https://zahrafannane.beehiiv.com/subscribe" target="_blank" rel="noopener">Claim It Now</a>
       </div>
@@ -332,6 +333,7 @@
     <div class="section-label rose">The Rewire Deck</div>
     <div class="deck-product reveal">
       <div class="deck-preview" id="openModal">
+        <img class="deck-photo" src="assets/products-hero.jpg" alt="Zahra Fannane" loading="lazy"/>
         <div class="card-stack">
           <div class="stacked-card">
             <div class="stacked-card-inner">
