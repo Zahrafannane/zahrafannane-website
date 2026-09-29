@@ -126,6 +126,14 @@ h2{font-family:"Playfair Display",serif;font-weight:400;font-size:clamp(34px,5vw
 .price .why{margin-top:40px}
 @media(max-width:760px){.tiers{grid-template-columns:1fr}.tier .inc{min-height:0}}
 
+.frag{background:var(--cream);padding:72px 28px 0;text-align:center}
+.frag img{display:block;max-width:560px;width:100%;margin:0 auto;border:1px solid rgba(201,166,92,.55)}
+.whofor{background:var(--cream)}
+.whofor .take div{background:var(--cream)}
+.whofor .under{margin-top:40px;font-family:"Playfair Display",serif;font-style:italic;font-size:23px;color:var(--gold)}
+.price .amount{font-family:"Playfair Display",serif;font-size:clamp(72px,11vw,118px);font-weight:500;color:var(--gold);line-height:1;margin:18px 0 8px}
+.price .amount sup{font-size:.38em;vertical-align:38%}
+
 /* faq */
 .faq{background:var(--blush)}
 .faq details{border-bottom:1px solid var(--gold-line);padding:6px 0}
@@ -217,6 +225,30 @@ footer a{color:var(--bone);text-decoration:none}
 </section>
 
 
+<div class="frag"><img src="assets/workshop-detail-hands.jpg" alt=""/></div>
+
+<section class="whofor">
+  <div class="wrap">
+    <p class="label">Who this is for</p>
+    <h2>You'll know <em>if it's you.</em></h2>
+    <div class="take">
+      <div>
+        <h3>You over-function</h3>
+        <p>You run the house, the work, the people, and what everyone needs before they've asked. You're capable in every room and last on every list.</p>
+      </div>
+      <div>
+        <h3>You're not attracting what you want</h3>
+        <p>The relationship, the money, the recognition, the life you can picture so clearly — it keeps landing for other women and staying just out of your reach.</p>
+      </div>
+      <div>
+        <h3>You've done everything, and something's still missing</h3>
+        <p>The books, the podcasts, the journaling, the therapy. You know yourself well. And there's still a quiet sense that you're living a size below who you are.</p>
+      </div>
+    </div>
+    <p class="under">If two of those are you, the third one probably is too. Same story, three rooms.</p>
+  </div>
+</section>
+
 <section class="room">
   <div class="wrap">
     <p class="label">In the room</p>
@@ -295,35 +327,24 @@ footer a{color:var(--bone);text-decoration:none}
   </div>
 </section>
 
+<div class="frag"><img src="assets/workshop-detail-bowl.jpg" alt="" style="max-width:360px"/></div>
+
 <section class="price" id="join">
   <div class="wrap">
     <p class="label">Your seat</p>
-    <h2>Two ways <em>to be in the room.</em></h2>
-    <div class="tiers">
-      <div class="tier">
-        <p class="tag">Workshop</p>
-        <p class="amount"><sup>$</sup>62</p>
-        <p class="inc">The full 90 minutes live · the written exercise · the thirty-day practice · replay of the teaching</p>
-        <a class="cta" href="#" data-checkout="seat">Save your seat</a>
-        <p class="note">Ten seats</p>
-      </div>
-      <div class="tier vip">
-        <p class="tag">Workshop + private call</p>
-        <p class="amount"><sup>$</sup>197</p>
-        <p class="inc">Everything above, plus a 30-minute private call with me the same day — we take the story you found and look at where it's running in your life right now.</p>
-        <a class="cta" href="#" data-checkout="vip">Save a VIP seat</a>
-        <p class="note">Three only</p>
-      </div>
-    </div>
-    <p class="why">No crossed-out price, no countdown theater. It's what 90 live minutes of this work costs — and a fraction of what the old story charges you every week.</p>
+    <p class="amount"><sup>$</sup>62</p>
+    <p class="why">One honest number, per seat. Ten seats. It's what 90 live minutes of this work costs — and a fraction of what the old story charges you every week.</p>
     <div class="meta-strip">
       <div><div class="k">Date</div><div class="v">Sunday, October 18</div></div>
       <div><div class="k">Time</div><div class="v">10:00 AM Pacific</div></div>
       <div><div class="k">Format</div><div class="v">Live · Virtual</div></div>
       <div><div class="k">Length</div><div class="v">90 minutes</div></div>
     </div>
+    <a class="cta" href="#" style="margin-top:52px">Save your seat — $62</a>
   </div>
 </section>
+
+<div class="frag" style="background:var(--blush);padding-top:0"><img src="assets/workshop-detail-fabric.jpg" alt=""/></div>
 
 <section class="faq">
   <div class="narrow">
@@ -336,10 +357,6 @@ footer a{color:var(--bone);text-decoration:none}
     <details>
       <summary>What if I can't make it live?</summary>
       <p>The teaching is recorded and yours to keep. The exercise and the sharing aren't — that part only happens in the room, so come if you can.</p>
-    </details>
-    <details>
-      <summary>Is this therapy?</summary>
-      <p>No. This is a coaching and education room — belief work, not treatment, and no therapy techniques are used. If you're in therapy, this sits alongside it.</p>
     </details>
     <details>
       <summary>What if I've read all the books already?</summary>
