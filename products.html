@@ -81,6 +81,13 @@
   .btn-arrow:hover::after { transform:translateX(6px); }
 
   /* Self-Trust row */
+  .workshop-band { background:var(--blush); position:relative; overflow:hidden; }
+  .workshop-band::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 15% 20%, rgba(149,105,122,.12) 0%, transparent 55%); pointer-events:none; }
+  .workshop-band .feature-panel { background:var(--white); }
+  .workshop-band .feature-name { color:var(--plum); }
+  .workshop-band .feature-name em { color:var(--rose); }
+  .workshop-band .feature-desc { color:#6B4A56; }
+  .workshop-band .feature-price { color:var(--plum); }
   .st-row { background:var(--offwhite); }
 
   /* Pedestal band */
@@ -263,6 +270,27 @@
     </div>
   </div>
 </header>
+
+<!-- WORKSHOP -->
+<section class="feature workshop-band">
+  <div class="container">
+    <div class="feature-grid flip reveal">
+      <div class="feature-img rose-frame">
+        <img src="assets/product-workshop.jpg" alt="Live workshop with Zahra Fannane" loading="lazy"/>
+      </div>
+      <div class="feature-panel">
+        <p class="feature-kicker rose">Live Workshop · Sunday, October 18 · 10:00 AM Pacific</p>
+        <h2 class="feature-name">The Life You Keep Picturing <em>Is Not Out of Reach</em></h2>
+        <p class="feature-desc">Ninety minutes, live, ten seats. We use neuroscience and the science of the mind to find the limiting belief that’s been deciding what you’re allowed, release it, and begin the identity of the woman who attracts the life she wants — instead of chasing it. You leave knowing exactly what was standing in the way, and it isn’t in charge anymore.</p>
+        <div class="feature-meta">
+          <span class="feature-price"><sup>$</sup>62</span>
+          <span class="feature-price-label">Per seat · VIP with private call, $197</span>
+        </div>
+        <a class="btn-arrow" href="workshop.html">Save Your Seat</a>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- SELF-TRUST FILE -->
 <section class="feature st-row">
