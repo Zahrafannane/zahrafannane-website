@@ -45,6 +45,9 @@ em,i{font-style:italic}
 .hero .meta{margin-top:22px;font-size:13.5px;letter-spacing:.14em;color:var(--rose)}
 .hero .meta b{color:var(--bone);font-weight:400}
 
+.hero-photo{background:var(--cream);padding:0 28px;position:relative;z-index:2}
+.hero-photo img{display:block;max-width:640px;width:100%;margin:-110px auto 0;border:1px solid rgba(201,166,92,.55);box-shadow:0 30px 80px rgba(59,37,48,.28)}
+
 /* generic sections */
 section{padding:96px 0}
 .label{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:26px}
@@ -159,7 +162,8 @@ footer a{color:var(--bone);text-decoration:none}
 
 @media(max-width:760px){
   section{padding:70px 0}
-  .hero{padding:52px 0 70px}
+  .hero{padding:52px 0 96px}
+  .hero-photo img{margin-top:-56px}
   .hero .frame{padding:46px 22px 42px}
   .shift .grid,.take{grid-template-columns:1fr}
   .mv{grid-template-columns:1fr;gap:8px;padding:32px 0}
@@ -185,8 +189,8 @@ footer a{color:var(--bone);text-decoration:none}
   </div>
 </header>
 
-<div style="background:var(--cream);padding:0 28px">
-  <img src="assets/workshop-siren.jpg" alt="Zahra Fannane" style="display:block;max-width:640px;width:100%;margin:-110px auto 0;border:1px solid rgba(201,166,92,.55);box-shadow:0 30px 80px rgba(59,37,48,.28)"/>
+<div class="hero-photo">
+  <img src="assets/workshop-siren.jpg" alt="Zahra Fannane"/>
 </div>
 
 <section class="scenes">
