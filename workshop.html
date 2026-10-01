@@ -141,6 +141,22 @@ h2{font-family:"Playfair Display",serif;font-weight:400;font-size:clamp(38px,5.5
 .price .amount{font-family:"Playfair Display",serif;font-size:clamp(72px,11vw,118px);font-weight:500;color:var(--gold);line-height:1;margin:18px 0 8px}
 .price .amount sup{font-size:.38em;vertical-align:38%}
 
+.hold{background:var(--cream);text-align:center}
+.hold .lede{margin:0 auto}
+.hold-form{max-width:520px;margin:44px auto 0;text-align:left;display:flex;flex-direction:column;gap:18px}
+.hold-form label{display:flex;flex-direction:column;gap:8px;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+.hold-form input[type=text],.hold-form input[type=email]{font-family:"Montserrat",sans-serif;font-size:18px;padding:16px 18px;border:1px solid var(--gold-line);background:#fff;color:var(--ink);outline:none}
+.hold-form input:focus{border-color:var(--gold)}
+.tier-pick{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}
+.tier-opt{flex-direction:row!important;align-items:center;gap:12px!important;padding:16px 18px;border:1px solid var(--gold-line);background:#fff;cursor:pointer;text-transform:none!important;letter-spacing:0!important;font-size:16px!important;color:var(--ink)!important}
+.tier-opt:has(input:checked){border-color:var(--gold);background:var(--blush)}
+.tier-opt input{accent-color:var(--gold)}
+.hold-form .cta{margin-top:10px;align-self:center;border:0;cursor:pointer;font-family:"Montserrat",sans-serif}
+.hold-note{text-align:center;font-size:14px;color:var(--rose);margin-top:-4px}
+.hold-done{max-width:520px;margin:44px auto 0;padding:40px 32px;background:var(--blush);border:1px solid var(--gold-line)}
+.hold-done .done-head{font-family:"Playfair Display",serif;font-size:32px;color:var(--plum);margin-bottom:10px}
+@media(max-width:760px){.tier-pick{grid-template-columns:1fr}}
+
 /* faq */
 .faq{background:var(--blush)}
 .faq details{border-bottom:1px solid var(--gold-line);padding:6px 0}
@@ -183,7 +199,7 @@ footer a{color:var(--bone);text-decoration:none}
       <p class="kicker">A 90-minute live workshop</p>
       <h1>The life you keep picturing <em style="color:var(--rose-lt)">is not out of reach.</em></h1>
       <p class="dek">The relationship, the recognition, the money, the way you want to be treated — you've done everything right and you're still chasing it. What's in the way isn't effort. It's a belief, and beliefs can be rewired. In ninety live minutes you use neuroscience and the science of the mind to find it, release it, and start becoming the woman who attracts the life she wants.</p>
-      <a class="cta" href="#join">Save your seat — $62</a>
+      <a class="cta" href="#hold">Save your seat — $62</a>
       <p class="meta"><b>Sunday, October 18 &nbsp;·&nbsp; 10:00 AM Pacific</b> &nbsp;·&nbsp; Live · Virtual &nbsp;·&nbsp; Ten seats</p>
     </div>
   </div>
@@ -358,14 +374,14 @@ footer a{color:var(--bone);text-decoration:none}
         <p class="tag">Workshop</p>
         <p class="amount"><sup>$</sup>62</p>
         <p class="inc">The full 90 minutes live · the written exercise · the thirty-day practice · replay of the teaching</p>
-        <a class="cta" href="#" data-checkout="seat">Save your seat</a>
+        <a class="cta" href="#hold" data-tier="Workshop seat — $62">Save your seat</a>
         <p class="note">Ten seats</p>
       </div>
       <div class="tier vip">
         <p class="tag">Workshop + private call</p>
         <p class="amount"><sup>$</sup>197</p>
         <p class="inc">Everything above, plus a 30-minute private call with me the same day — we take the story you found and look at where it's running in your life right now.</p>
-        <a class="cta" href="#" data-checkout="vip">Save a VIP seat</a>
+        <a class="cta" href="#hold" data-tier="VIP — workshop + private call — $197">Save a VIP seat</a>
       </div>
     </div>
     <div class="meta-strip">
@@ -378,6 +394,32 @@ footer a{color:var(--bone);text-decoration:none}
 </section>
 
 <div class="frag" style="background:var(--blush);padding-top:0;padding-bottom:0"><img src="assets/workshop-detail-sofa.jpg" alt="" style="max-width:480px"/></div>
+
+<section class="hold" id="hold">
+  <div class="narrow">
+    <p class="label">Hold your seat</p>
+    <h2>Ten seats. <em>Put your name on one.</em></h2>
+    <p class="lede">Leave your name and email and I'll send your payment link within a day. Seats are held in the order they come in.</p>
+    <form class="hold-form" id="holdForm" action="https://formsubmit.co/ajax/contact@zahrafannane.com" method="POST">
+      <input type="hidden" name="_subject" value="Workshop seat request — Oct 18">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+      <label>First name<input type="text" name="first_name" required autocomplete="given-name"></label>
+      <label>Email<input type="email" name="email" required autocomplete="email"></label>
+      <div class="tier-pick">
+        <label class="tier-opt"><input type="radio" name="seat" value="Workshop seat — $62" checked><span>Workshop · $62</span></label>
+        <label class="tier-opt"><input type="radio" name="seat" value="VIP — workshop + private call — $197"><span>VIP + private call · $197</span></label>
+      </div>
+      <button class="cta" type="submit">Hold my seat</button>
+      <p class="hold-note">No payment yet. Your link arrives by email.</p>
+    </form>
+    <div class="hold-done" id="holdDone" hidden>
+      <p class="done-head">You're on the list.</p>
+      <p>Watch your inbox — your payment link is on its way, and your seat is held until then.</p>
+    </div>
+  </div>
+</section>
 
 <section class="faq">
   <div class="narrow">
@@ -402,7 +444,7 @@ footer a{color:var(--bone);text-decoration:none}
   <div class="wrap">
     <h2>Become the woman <em>who has it.</em></h2>
     <p class="sub">90 minutes. The limiting belief found and released, the new identity begun. The woman who leaves the room isn't the one who walked in — she knows exactly what was standing between her and the life she wants, and it isn't in charge anymore.</p>
-    <a class="cta ghost" href="#join" onclick="document.getElementById('join').scrollIntoView();return false;" style="margin-top:44px">Save your seat — $62</a>
+    <a class="cta ghost" href="#hold" style="margin-top:44px">Save your seat — $62</a>
     <p class="sig">With love, Zahra</p>
   </div>
 </section>
@@ -411,5 +453,20 @@ footer a{color:var(--bone);text-decoration:none}
   <a href="index.html">zahrafannane.com</a> &nbsp;·&nbsp; © 2026 Zahra Fannane Coaching, LLC
 </footer>
 
+<script>
+(function(){
+  var f=document.getElementById('holdForm'),d=document.getElementById('holdDone');
+  document.querySelectorAll('a[data-tier]').forEach(function(a){a.addEventListener('click',function(){
+    var v=a.getAttribute('data-tier');f.querySelectorAll('input[name=seat]').forEach(function(r){r.checked=(r.value===v);});
+  });});
+  f.addEventListener('submit',function(e){
+    e.preventDefault();var b=f.querySelector('button');b.textContent='Holding…';b.disabled=true;
+    fetch(f.action,{method:'POST',headers:{'Accept':'application/json'},body:new FormData(f)})
+      .then(function(r){return r.json();})
+      .then(function(){f.hidden=true;d.hidden=false;d.scrollIntoView({behavior:'smooth',block:'center'});})
+      .catch(function(){b.textContent='Hold my seat';b.disabled=false;alert('Something went wrong — please email contact@zahrafannane.com and I will hold your seat by hand.');});
+  });
+})();
+</script>
 </body>
 </html>
