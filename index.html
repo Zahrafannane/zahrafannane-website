@@ -422,6 +422,12 @@
   .zc-img::after { content:""; position:absolute; inset:0; border:1px solid var(--gold-line); pointer-events:none; }
   .zc-img img { width:100%; height:100%; object-fit:cover; object-position:center 15%; display:block; transition:transform 1.1s ease; }
   .zc-card:hover .zc-img img { transform:scale(1.04); }
+  .zc-cover { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:22px; text-align:center; padding:28px; background:radial-gradient(ellipse at 30% 20%, #6E4B8B 0%, #4A2F63 48%, #2E1B40 100%); }
+  .zc-cover::after { border-color:rgba(212,170,72,.45); inset:14px; }
+  .zc-cover__rule { width:44px; height:1px; background:var(--gold-lt); }
+  .zc-cover__small { font-size:9px; font-weight:600; letter-spacing:.34em; text-transform:uppercase; color:rgba(245,237,212,.78); }
+  .zc-cover__title { font-family:"Cormorant Garamond",serif; font-size:clamp(34px,3.4vw,46px); font-weight:300; line-height:1.08; color:#F7F1E3; }
+  .zc-cover__title em { font-style:italic; color:var(--gold-lt); }
   .zc-kicker { font-size:10px; font-weight:600; letter-spacing:.26em; text-transform:uppercase; color:var(--gold); margin-bottom:10px; }
   .zc-name { font-family:"Cormorant Garamond",serif; font-size:27px; font-weight:400; line-height:1.2; color:var(--text); margin-bottom:10px; }
   .zc-desc { font-size:13.5px; font-weight:300; line-height:1.8; color:var(--text-mid); margin-bottom:16px; flex:1; }
@@ -466,7 +472,13 @@
         <div class="zc-btns"><a class="zc-cta" href="https://buy.stripe.com/8x28wRboa70ZbZV3fibAs00" target="_blank" rel="noopener">Claim It Now</a></div>
       </article>
       <article class="zc-card reveal" style="transition-delay:0.12s">
-        <div class="zc-img"><img src="assets/workshop-siren.jpg" alt="Securely Magnetic" loading="lazy"/></div>
+        <div class="zc-img zc-cover" role="img" aria-label="Securely Magnetic">
+          <span class="zc-cover__rule"></span>
+          <span class="zc-cover__small">Seven Days</span>
+          <span class="zc-cover__title">Securely<br/><em>Magnetic</em></span>
+          <span class="zc-cover__small">Insecure to Secure</span>
+          <span class="zc-cover__rule"></span>
+        </div>
         <p class="zc-kicker">7-Day Program</p>
         <h3 class="zc-name">Securely Magnetic</h3>
         <p class="zc-desc">From anxious to secure. Stop chasing and become the one who is chosen.</p>
