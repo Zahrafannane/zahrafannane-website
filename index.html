@@ -407,103 +407,6 @@
   </div>
 </div>
 
-<!-- THE COLLECTION -->
-<style>
-  .zc { padding:112px 0 96px; background:var(--white); }
-  .zc-head { max-width:680px; margin:0 auto 64px; text-align:center; }
-  .zc-eyebrow { font-size:10px; font-weight:600; letter-spacing:.32em; text-transform:uppercase; color:var(--gold); margin-bottom:18px; }
-  .zc-title { font-family:"Cormorant Garamond",serif; font-size:clamp(34px,4.2vw,60px); font-weight:300; line-height:1.1; color:var(--text); margin-bottom:22px; }
-  .zc-title em { font-style:italic; color:var(--gold); }
-  .zc-intro { font-size:14px; font-weight:300; line-height:1.9; color:var(--text-mid); }
-  .zc-grid { display:grid; grid-template-columns:repeat(6,1fr); gap:56px 32px; }
-  .zc-card { grid-column:span 2; display:flex; flex-direction:column; }
-  .zc-card:nth-child(4) { grid-column:2 / span 2; }
-  .zc-img { aspect-ratio:4/5; overflow:hidden; background:var(--lightgray); margin-bottom:22px; position:relative; }
-  .zc-img::after { content:""; position:absolute; inset:0; border:1px solid var(--gold-line); pointer-events:none; }
-  .zc-img img { width:100%; height:100%; object-fit:cover; object-position:center 15%; display:block; transition:transform 1.1s ease; }
-  .zc-card:hover .zc-img img { transform:scale(1.04); }
-  .zc-kicker { font-size:10px; font-weight:600; letter-spacing:.26em; text-transform:uppercase; color:var(--gold); margin-bottom:10px; }
-  .zc-name { font-family:"Cormorant Garamond",serif; font-size:27px; font-weight:400; line-height:1.2; color:var(--text); margin-bottom:10px; }
-  .zc-desc { font-size:13.5px; font-weight:300; line-height:1.8; color:var(--text-mid); margin-bottom:16px; flex:1; }
-  .zc-meta { display:flex; align-items:baseline; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
-  .zc-price { font-family:"Cormorant Garamond",serif; font-size:28px; font-weight:400; color:var(--text); line-height:1; }
-  .zc-price--2 { margin-left:10px; }
-  .zc-was { font-size:14px; color:var(--text-light); text-decoration:line-through; }
-  .zc-note { font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--text-light); }
-  .zc-btns { display:flex; gap:22px; }
-  .zc-cta { display:inline-flex; align-items:center; gap:10px; font-size:10px; font-weight:600; letter-spacing:.24em; text-transform:uppercase; color:var(--text); text-decoration:none; padding-bottom:6px; border-bottom:1px solid var(--gold); transition:color .3s; }
-  .zc-cta::after { content:"\2192"; font-size:13px; letter-spacing:0; }
-  .zc-cta:hover { color:var(--gold); }
-  @media(max-width:900px){
-    .zc { padding:72px 0 64px; }
-    .zc-grid { grid-template-columns:1fr 1fr; gap:44px 20px; }
-    .zc-card, .zc-card:nth-child(4) { grid-column:auto; }
-  }
-  @media(max-width:560px){ .zc-grid { grid-template-columns:1fr; } }
-</style>
-<section class="zc" id="collection">
-  <div class="container">
-    <div class="zc-head reveal">
-      <p class="zc-eyebrow">The Collection</p>
-      <h2 class="zc-title">Unlearn the programming.<br/><em>Become her.</em></h2>
-      <p class="zc-intro">Get rid of what stands between you and building the life you want.</p>
-    </div>
-    <div class="zc-grid">
-      <article class="zc-card reveal" style="transition-delay:0.00s">
-        <div class="zc-img"><img src="assets/product-selftrust.jpg" alt="The Self-Trust File" loading="lazy"/></div>
-        <p class="zc-kicker">Free</p>
-        <h3 class="zc-name">The Self-Trust File</h3>
-        <p class="zc-desc">Seven days to trust yourself again.</p>
-        <div class="zc-meta"><span class="zc-price">Free</span></div>
-        <div class="zc-btns"><a class="zc-cta" href="self-trust-file.html">Get It Free</a></div>
-      </article>
-      <article class="zc-card reveal" style="transition-delay:0.06s">
-        <div class="zc-img"><img src="assets/product-pedestal.jpg" alt="The Pedestal" loading="lazy"/></div>
-        <p class="zc-kicker">7-Day Program</p>
-        <h3 class="zc-name">The Pedestal</h3>
-        <p class="zc-desc">Seven days back to being the priority in your own life.</p>
-        <div class="zc-meta"><span class="zc-price">$44</span><span class="zc-was">$88</span><span class="zc-note">Launch price</span></div>
-        <div class="zc-btns"><a class="zc-cta" href="https://buy.stripe.com/8x28wRboa70ZbZV3fibAs00" target="_blank" rel="noopener">Claim It Now</a></div>
-      </article>
-      <article class="zc-card reveal" style="transition-delay:0.12s">
-        <div class="zc-img"><img src="assets/product-securely-magnetic.jpg" alt="Securely Magnetic" loading="lazy" style="object-position:center 8%;"/></div>
-        <p class="zc-kicker">7-Day Program</p>
-        <h3 class="zc-name">Securely Magnetic</h3>
-        <p class="zc-desc">From anxious to secure. Stop chasing and become the one who is chosen.</p>
-        <div class="zc-meta"><span class="zc-price">$169</span></div>
-        <div class="zc-btns"><a class="zc-cta" href="https://buy.stripe.com/6oU9AV63Q70Zggb7vybAs05" target="_blank" rel="noopener">Become Secure</a></div>
-      </article>
-      <article class="zc-card reveal" style="transition-delay:0.18s">
-        <div class="zc-img"><img src="assets/workshop-detail-train.jpg" alt="The Rewire Deck" loading="lazy"/></div>
-        <p class="zc-kicker">Daily Practice</p>
-        <h3 class="zc-name">The Rewire Deck</h3>
-        <p class="zc-desc">Daily cards to unlearn limiting beliefs.</p>
-        <div class="zc-meta"><span class="zc-price">$44</span><span class="zc-note">Digital</span> <span class="zc-price zc-price--2">$62</span><span class="zc-note">Physical</span></div>
-        <div class="zc-btns"><a class="zc-cta" href="https://buy.stripe.com/8x2cN7dwi8537JF2bebAs03" target="_blank" rel="noopener">Digital</a><a class="zc-cta" href="https://buy.stripe.com/9B6fZjak6clj7JF2bebAs04" target="_blank" rel="noopener">Physical</a></div>
-      </article>
-      <article class="zc-card reveal" style="transition-delay:0.24s">
-        <div class="zc-img"><img src="assets/zahra-bw-seated.jpg" alt="Private Coaching: The Six-Week Return" loading="lazy"/></div>
-        <p class="zc-kicker">One to One</p>
-        <h3 class="zc-name">Private Coaching: The Six-Week Return</h3>
-        <p class="zc-desc">Six weeks with me, one to one, to become her.</p>
-        <div class="zc-meta"><span class="zc-price">$1,700</span></div>
-        <div class="zc-btns"><a class="zc-cta" href="https://calendly.com/zahrafannanecoach/discovery-call" target="_blank" rel="noopener">Book a Discovery Call</a></div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- ABOUT CTA -->
-<div style="text-align:center; padding:0 72px 80px; background:var(--white);">
-  <p style="font-family:'Cormorant Garamond',serif; font-size:clamp(18px,2.2vw,28px); font-weight:300; font-style:italic; color:var(--text); margin-bottom:32px; line-height:1.5;">
-    Ready to understand what's actually been running your life?
-  </p>
-  <div style="display:flex; gap:20px; justify-content:center; flex-wrap:wrap;">
-    <a href="self-trust-file.html" style="display:inline-flex; align-items:center; font-size:11px; font-weight:600; letter-spacing:.24em; text-transform:uppercase; color:var(--white); background:var(--gold); padding:16px 44px; text-decoration:none; transition:opacity .3s;">Unlock Self-Trust and Become Magnetic</a>
-    <a href="https://calendly.com/zahrafannanecoach/discovery-call" target="_blank" style="display:inline-flex; align-items:center; font-size:11px; font-weight:600; letter-spacing:.24em; text-transform:uppercase; color:var(--gold); border:1px solid var(--gold); padding:16px 44px; text-decoration:none; transition:all .3s;">Book a Discovery Call</a>
-  </div>
-</div>
-
 <!-- DESERT -->
 <div class="desert-section">
   <div class="desert-overlay"></div>
@@ -558,6 +461,161 @@
     .desert-section { background-attachment: scroll; height: 360px; }
   }
 </style>
+
+<!-- THE COLLECTION -->
+<style>
+  .zc { padding:112px 0 72px; background:var(--white); }
+  .zc-head { max-width:720px; margin:0 auto 96px; text-align:center; }
+  .zc-eyebrow { font-size:10px; font-weight:600; letter-spacing:.32em; text-transform:uppercase; color:var(--gold); margin-bottom:18px; }
+  .zc-title { font-family:"Cormorant Garamond",serif; font-size:clamp(34px,4.2vw,60px); font-weight:300; line-height:1.1; color:var(--text); margin-bottom:26px; }
+  .zc-title em { font-style:italic; color:var(--gold); }
+  .zc-intro { font-size:15px; font-weight:300; line-height:1.95; color:var(--text-mid); margin-bottom:16px; }
+  .zc-intro strong { font-weight:400; color:var(--text); }
+  .zf-feat { display:grid; grid-template-columns:1fr 1fr; gap:88px; align-items:center; padding:72px 0; border-top:1px solid var(--gold-line); }
+  .zf-feat--flip .zf-feat__media { order:2; }
+  .zf-feat__media { position:relative; max-width:460px; width:100%; justify-self:center; }
+  .zf-feat__img { aspect-ratio:4/5; overflow:hidden; background:var(--lightgray); position:relative; }
+  .zf-feat__img::after { content:""; position:absolute; inset:0; border:1px solid var(--gold-line); pointer-events:none; }
+  .zf-feat__img img { width:100%; height:100%; object-fit:cover; object-position:center 12%; display:block; }
+  .zf-inset { position:absolute; right:-36px; bottom:-36px; width:38%; box-shadow:0 18px 44px rgba(26,18,8,.28); border:6px solid var(--white); display:block; }
+  .zf-feat--flip .zf-inset { right:auto; left:-36px; }
+  .zc-kicker { font-size:10px; font-weight:600; letter-spacing:.26em; text-transform:uppercase; color:var(--gold); margin-bottom:12px; }
+  .zf-feat__name { font-family:"Cormorant Garamond",serif; font-size:clamp(30px,3.2vw,44px); font-weight:300; line-height:1.12; color:var(--text); margin-bottom:14px; }
+  .zf-feat__lead { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:20px; line-height:1.5; color:var(--text-mid); margin-bottom:26px; }
+  .zf-feat__dl dt { font-size:10px; font-weight:600; letter-spacing:.24em; text-transform:uppercase; color:var(--text); margin-bottom:8px; }
+  .zf-feat__dl dd { font-size:14px; font-weight:300; line-height:1.9; color:var(--text-mid); margin:0 0 22px; }
+  .zf-feat__meta { display:flex; align-items:baseline; flex-wrap:wrap; gap:8px; margin:6px 0 20px; }
+  .zf-price { font-family:"Cormorant Garamond",serif; font-size:34px; font-weight:400; color:var(--text); line-height:1; }
+  .zf-price--2 { margin-left:12px; }
+  .zf-was { font-size:15px; color:var(--text-light); text-decoration:line-through; }
+  .zf-note { font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--text-light); }
+  .zc-btns { display:flex; gap:24px; flex-wrap:wrap; }
+  .zc-cta { display:inline-flex; align-items:center; gap:10px; font-size:10px; font-weight:600; letter-spacing:.24em; text-transform:uppercase; color:var(--text); text-decoration:none; padding-bottom:6px; border-bottom:1px solid var(--gold); transition:color .3s; }
+  .zc-cta::after { content:"\2192"; font-size:13px; letter-spacing:0; }
+  .zc-cta:hover { color:var(--gold); }
+  .zc-close { max-width:680px; margin:40px auto 0; padding-top:56px; border-top:1px solid var(--gold-line); text-align:center; font-family:"Cormorant Garamond",serif; font-style:italic; font-size:clamp(22px,2.4vw,30px); font-weight:300; line-height:1.5; color:var(--text); }
+  @media(max-width:900px){
+    .zc { padding:72px 0 48px; }
+    .zc-head { margin-bottom:56px; }
+    .zf-feat { grid-template-columns:1fr; gap:44px; padding:56px 0; }
+    .zf-feat--flip .zf-feat__media { order:0; }
+    .zf-feat__media { max-width:340px; }
+    .zf-inset, .zf-feat--flip .zf-inset { right:-14px; left:auto; bottom:-22px; }
+  }
+</style>
+<section class="zc" id="collection">
+  <div class="container">
+    <div class="zc-head reveal">
+      <p class="zc-eyebrow">The Collection</p>
+      <h2 class="zc-title">Unlearn the programming.<br/><em>Become her.</em></h2>
+      <p class="zc-intro"><strong>Get rid of what stands between you and building the life you want.</strong></p>
+      <p class="zc-intro">Most of what keeps a woman stuck was learned early and has been running quietly ever since. The people-pleasing. The second-guessing. The chasing. The shrinking. None of it is who you are. It is programming, and programming can be unlearned.</p>
+      <p class="zc-intro">Reprogramming your mind is a big part of this journey. Each piece below names a pattern, shows you the work, and tells you how it feels to be free of it.</p>
+    </div>
+    <article class="zf-feat">
+      <div class="zf-feat__media reveal">
+        <div class="zf-feat__img"><img src="assets/product-selftrust.jpg" alt="The Self-Trust File" loading="lazy"/></div>
+        <img class="zf-inset" src="assets/self-trust-file-cover-v2.jpg" alt=""/>
+      </div>
+      <div class="zf-feat__text reveal">
+        <p class="zc-kicker">Free · 7 Days</p>
+        <h3 class="zf-feat__name">The Self-Trust File</h3>
+        <p class="zf-feat__lead">For the woman who asks everyone else before she asks herself.</p>
+        <dl class="zf-feat__dl">
+          <dt>The pattern: Self-doubt</dt><dd>You make yourself a promise and break it by Thursday. You check with three people before you decide. Over time you stop believing your own word, and it shows in how you carry yourself.</dd>
+          <dt>The work</dt><dd>Seven days, three prompts a day. Every boundary you hold and every promise you keep goes on the page, so your mind has proof instead of pep talks. Twenty-one pieces of evidence by day seven.</dd>
+          <dt>On the other side</dt><dd>You decide, and you stay decided. You feel steady and self-contained, and that steadiness is what people read as magnetic.</dd>
+        </dl>
+        <div class="zf-feat__meta"><span class="zf-price">Free</span></div>
+        <div class="zc-btns"><a class="zc-cta" href="self-trust-file.html">Get It Free</a></div>
+      </div>
+    </article>
+    <article class="zf-feat zf-feat--flip">
+      <div class="zf-feat__media reveal">
+        <div class="zf-feat__img"><img src="assets/product-pedestal.jpg" alt="The Pedestal" loading="lazy"/></div>
+        
+      </div>
+      <div class="zf-feat__text reveal">
+        <p class="zc-kicker">7-Day Program</p>
+        <h3 class="zf-feat__name">The Pedestal</h3>
+        <p class="zf-feat__lead">A seven-day return to being the priority in your own life.</p>
+        <dl class="zf-feat__dl">
+          <dt>The pattern: The step-down</dt><dd>You say "it's fine" when it isn't. You over-explain, over-give, and let everyone else's plans come first, then call it love, loyalty, or being easygoing. Nobody pushed you off the pedestal. You stepped down, one reasonable decision at a time.</dd>
+          <dt>The work</dt><dd>Fifteen minutes a morning and one method: catch it, interrupt it, act as if. You find the old rules you have been keeping, rewrite them with proof from your own life, and finish with a vow in your own handwriting. Workbook now, morning audios coming soon.</dd>
+          <dt>On the other side</dt><dd>You stop shrinking to be easier to love. You are chosen first and heard the first time, because you stopped overlooking yourself.</dd>
+        </dl>
+        <div class="zf-feat__meta"><span class="zf-price">$44</span><span class="zf-was">$88</span><span class="zf-note">Launch price</span></div>
+        <div class="zc-btns"><a class="zc-cta" href="https://buy.stripe.com/8x28wRboa70ZbZV3fibAs00" target="_blank" rel="noopener">Claim It Now</a></div>
+      </div>
+    </article>
+    <article class="zf-feat">
+      <div class="zf-feat__media reveal">
+        <div class="zf-feat__img"><img src="assets/product-securely-magnetic.jpg" alt="Securely Magnetic" loading="lazy"/></div>
+        <img class="zf-inset" src="assets/securely-magnetic-cover.jpg" alt=""/>
+      </div>
+      <div class="zf-feat__text reveal">
+        <p class="zc-kicker">7-Day Reprogramming</p>
+        <h3 class="zf-feat__name">Securely Magnetic</h3>
+        <p class="zf-feat__lead">How to stop chasing, stop bracing, and become the woman who is calm in love.</p>
+        <dl class="zf-feat__dl">
+          <dt>The pattern: Chasing and bracing</dt><dd>You reread a message eleven times. Or you go cold the second someone gets close. Either way you make yourself smaller so the room stays calm. That is not your personality. It is something your mind learned early and has been repeating ever since.</dd>
+          <dt>The work</dt><dd>Seven days, twenty minutes a day, three moves: notice, decode, respond. You learn the science in normal language, then practice a new response in the exact moments that used to run you. Nine pocket practices stay with you after.</dd>
+          <dt>On the other side</dt><dd>You ask for what you want in one sentence instead of three weeks of hinting. You stop auditioning for people who have not earned you. You are calm in love, and calm is magnetic.</dd>
+        </dl>
+        <div class="zf-feat__meta"><span class="zf-price">$169</span></div>
+        <div class="zc-btns"><a class="zc-cta" href="https://buy.stripe.com/6oU9AV63Q70Zggb7vybAs05" target="_blank" rel="noopener">Become Secure</a></div>
+      </div>
+    </article>
+    <article class="zf-feat zf-feat--flip">
+      <div class="zf-feat__media reveal">
+        <div class="zf-feat__img"><img src="assets/products-hero.jpg" alt="The Rewire Deck" loading="lazy"/></div>
+        
+      </div>
+      <div class="zf-feat__text reveal">
+        <p class="zc-kicker">Daily Practice · 61 Cards</p>
+        <h3 class="zf-feat__name">The Rewire Deck</h3>
+        <p class="zf-feat__lead">Sixty-one science-backed practices to unlearn limiting beliefs, one card at a time.</p>
+        <dl class="zf-feat__dl">
+          <dt>The pattern: The loop</dt><dd>You know what you should do. You have read the books and saved the posts. Then the day gets hard and the same old thoughts take over, because knowing is not the same as rewiring.</dd>
+          <dt>The work</dt><dd>One card a day across five areas: awareness, belief, identity, safety, and action. Each card gives you one small practice you can finish in minutes.</dd>
+          <dt>On the other side</dt><dd>The way you talk to yourself changes first. Then what you do. The old thought still shows up, and it no longer gets the final say.</dd>
+        </dl>
+        <div class="zf-feat__meta"><span class="zf-price">$44</span><span class="zf-note">Digital</span><span class="zf-price zf-price--2">$62</span><span class="zf-note">Physical</span></div>
+        <div class="zc-btns"><a class="zc-cta" href="https://buy.stripe.com/8x2cN7dwi8537JF2bebAs03" target="_blank" rel="noopener">Digital</a><a class="zc-cta" href="https://buy.stripe.com/9B6fZjak6clj7JF2bebAs04" target="_blank" rel="noopener">Physical</a></div>
+      </div>
+    </article>
+    <article class="zf-feat">
+      <div class="zf-feat__media reveal">
+        <div class="zf-feat__img"><img src="assets/zahra-bw-seated.jpg" alt="Private Coaching: The Six-Week Return" loading="lazy"/></div>
+        
+      </div>
+      <div class="zf-feat__text reveal">
+        <p class="zc-kicker">One to One · Six Weeks</p>
+        <h3 class="zf-feat__name">Private Coaching: The Six-Week Return</h3>
+        <p class="zf-feat__lead">One-to-one coaching for women who are done abandoning themselves.</p>
+        <dl class="zf-feat__dl">
+          <dt>The pattern: Self-abandonment</dt><dd>You say yes when you mean no. You over-function in relationships and call it love. You outperform at work and still feel like a fraud. You are generous with everyone and ruthless with yourself.</dd>
+          <dt>The work</dt><dd>Six weekly sessions with me, sixty minutes each, built around your patterns. We change what your body reads as safe, and we build the proof that you keep your word to yourself.</dd>
+          <dt>On the other side</dt><dd>You stop overriding yourself. You say the no, make the ask, and take up your full place, and the woman people meet is one you chose.</dd>
+        </dl>
+        <div class="zf-feat__meta"><span class="zf-price">$1,700</span><span class="zf-note">For the six weeks</span></div>
+        <div class="zc-btns"><a class="zc-cta" href="https://calendly.com/zahrafannanecoach/discovery-call" target="_blank" rel="noopener">Book a Discovery Call</a></div>
+      </div>
+    </article>
+    <p class="zc-close reveal">You will get results when you are ready to do this work and put yourself first.</p>
+  </div>
+</section>
+
+<!-- ABOUT CTA -->
+<div style="text-align:center; padding:0 72px 80px; background:var(--white);">
+  <p style="font-family:'Cormorant Garamond',serif; font-size:clamp(18px,2.2vw,28px); font-weight:300; font-style:italic; color:var(--text); margin-bottom:32px; line-height:1.5;">
+    Ready to understand what's actually been running your life?
+  </p>
+  <div style="display:flex; gap:20px; justify-content:center; flex-wrap:wrap;">
+    <a href="self-trust-file.html" style="display:inline-flex; align-items:center; font-size:11px; font-weight:600; letter-spacing:.24em; text-transform:uppercase; color:var(--white); background:var(--gold); padding:16px 44px; text-decoration:none; transition:opacity .3s;">Unlock Self-Trust and Become Magnetic</a>
+    <a href="https://calendly.com/zahrafannanecoach/discovery-call" target="_blank" style="display:inline-flex; align-items:center; font-size:11px; font-weight:600; letter-spacing:.24em; text-transform:uppercase; color:var(--gold); border:1px solid var(--gold); padding:16px 44px; text-decoration:none; transition:all .3s;">Book a Discovery Call</a>
+  </div>
+</div>
 
 <!-- ABOUT -->
 <section class="about" id="about">
